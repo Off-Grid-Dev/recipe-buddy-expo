@@ -1,10 +1,13 @@
 import { Text, View, StyleSheet } from "react-native";
+import { Link } from "expo-router";
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Edit app/index.tsx to edit this screen.</Text>
-      <Text style={styles.textAnswer}>...no.</Text>
+      <Text style={styles.text}>Home view</Text>
+      <Link href="/about" style={styles.button}>
+        Go to the About view
+      </Link>
     </View>
   );
 }
@@ -26,5 +29,11 @@ const styles = StyleSheet.create({
     color: "#e7e7e7",
     marginLeft: "auto",
     marginRight: 195,
+  },
+  button: {
+    borderRadius: 13,
+    padding: 16,
+    backgroundColor: "#090750",
+    color: "#b9a9f3",
   },
 });
