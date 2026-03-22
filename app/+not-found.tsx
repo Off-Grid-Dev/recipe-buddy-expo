@@ -1,5 +1,5 @@
-import { View, StyleSheet } from "react-native";
-import { Link, Stack } from "expo-router";
+import { View, Text, StyleSheet } from "react-native";
+import { Stack } from "expo-router";
 
 export default function NotFound() {
   return (
@@ -10,9 +10,7 @@ export default function NotFound() {
         }}
       />
       <View style={styles.container}>
-        <Link href="/" style={styles.button}>
-          Go back home. Idiot.
-        </Link>
+        <Text style={styles.button}>Go back home. Idiot.</Text>
       </View>
     </>
   );
