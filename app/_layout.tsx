@@ -23,14 +23,6 @@ function RootLayoutNav() {
         <Stack.Screen name="index" />
         <Stack.Screen name="new-recipe" />
         <Stack.Screen name="recipe/[id]/index" />
-        <Stack.Screen
-          name="recipe/[id]/cook"
-          options={{
-            // Cook mode slides up like a modal — feels intentional and focused
-            animation: "slide_from_bottom",
-            gestureEnabled: false, // prevent accidental swipe-dismiss mid-batch
-          }}
-        />
       </Stack>
     </>
   );

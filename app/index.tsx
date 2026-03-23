@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from "react";
 import {
   View,
   Text,
@@ -7,69 +7,80 @@ import {
   TextInput,
   Pressable,
   Image,
-  SafeAreaView,
   StatusBar,
-} from 'react-native';
-import { Link, useRouter } from 'expo-router';
-import { useTheme } from '../ThemeContext';
-import { Recipe } from '../types';
+} from "react-native";
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from "react-native-safe-area-context";
+import { Link, useRouter } from "expo-router";
+import { useTheme } from "../ThemeContext";
+import { Recipe } from "../types";
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 const MOCK_RECIPES: Recipe[] = [
   {
-    id: 'pistachio',
-    name: 'Pistachio Bronte',
-    category: 'gelato',
-    description: 'Made with pure Bronte pistachio paste. Intense green color and deeply nutty finish.',
+    id: "pistachio",
+    name: "Pistachio Bronte",
+    category: "gelato",
+    description:
+      "Made with pure Bronte pistachio paste. Intense green color and deeply nutty finish.",
     baseWeightGrams: 5000,
     ingredients: [],
     steps: [],
     agingTimeHours: 12,
-    imageUrl: 'https://plus.unsplash.com/premium_photo-1694116056814-edddc837a61d?w=900&auto=format&fit=crop&q=60',
+    imageUrl:
+      "https://plus.unsplash.com/premium_photo-1694116056814-edddc837a61d?w=900&auto=format&fit=crop&q=60",
   },
   {
-    id: 'stracciatella',
-    name: 'Stracciatella',
-    category: 'gelato',
-    description: 'Sweet cream base with hand-shaved dark chocolate flakes throughout.',
+    id: "stracciatella",
+    name: "Stracciatella",
+    category: "gelato",
+    description:
+      "Sweet cream base with hand-shaved dark chocolate flakes throughout.",
     baseWeightGrams: 5000,
     ingredients: [],
     steps: [],
     agingTimeHours: 6,
-    imageUrl: 'https://images.unsplash.com/photo-1706177175286-dfc625f8fabe?w=900&auto=format&fit=crop&q=60',
+    imageUrl:
+      "https://images.unsplash.com/photo-1706177175286-dfc625f8fabe?w=900&auto=format&fit=crop&q=60",
   },
   {
-    id: 'lemon-sorbet',
-    name: 'Lemon Sorbetto',
-    category: 'sorbetto',
-    description: 'Dairy-free and refreshing. Bright Sicilian lemon zest and freshly squeezed juice.',
+    id: "lemon-sorbet",
+    name: "Lemon Sorbetto",
+    category: "sorbetto",
+    description:
+      "Dairy-free and refreshing. Bright Sicilian lemon zest and freshly squeezed juice.",
     baseWeightGrams: 4000,
     ingredients: [],
     steps: [],
     agingTimeHours: 4,
-    imageUrl: 'https://images.unsplash.com/photo-1608322368735-b6b6ec262af7?w=900&auto=format&fit=crop&q=60',
+    imageUrl:
+      "https://images.unsplash.com/photo-1608322368735-b6b6ec262af7?w=900&auto=format&fit=crop&q=60",
   },
   {
-    id: 'dark-choc',
-    name: 'Dark Chocolate 70%',
-    category: 'gelato',
-    description: 'Rich cocoa base with deep, balanced sweetness and a clean finish.',
+    id: "dark-choc",
+    name: "Dark Chocolate 70%",
+    category: "gelato",
+    description:
+      "Rich cocoa base with deep, balanced sweetness and a clean finish.",
     baseWeightGrams: 5000,
     ingredients: [],
     steps: [],
     agingTimeHours: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1593410974855-87ab9de04bb5?w=900&auto=format&fit=crop&q=60',
+    imageUrl:
+      "https://images.unsplash.com/photo-1593410974855-87ab9de04bb5?w=900&auto=format&fit=crop&q=60",
   },
 ];
 
 // ─── Badge Component ──────────────────────────────────────────────────────────
-function CategoryBadge({ category }: { category: Recipe['category'] }) {
+function CategoryBadge({ category }: { category: Recipe["category"] }) {
   const { colors, textStyles } = useTheme();
 
   const badgeColors = {
-    gelato:   { bg: colors.badgeGelato,   text: colors.badgeGelatoText },
+    gelato: { bg: colors.badgeGelato, text: colors.badgeGelatoText },
     sorbetto: { bg: colors.badgeSorbetto, text: colors.badgeSorbettoText },
-    crema:    { bg: colors.badgeCrema,    text: colors.badgeCremaText },
+    crema: { bg: colors.badgeCrema, text: colors.badgeCremaText },
   };
 
   const { bg, text } = badgeColors[category];
@@ -100,13 +111,18 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
           backgroundColor: colors.bgSecondary,
           borderRadius: radii.lg,
           borderColor: pressed ? colors.borderAccent : colors.borderSubtle,
-          ...(mode === 'dark' ? shadows.card : shadows.cardLight),
+          ...(mode === "dark" ? shadows.card : shadows.cardLight),
         },
         pressed && { transform: [{ scale: 0.985 }] },
       ]}
     >
       {/* Card Image */}
-      <View style={[styles.cardImageWrapper, { borderRadius: radii.lg, overflow: 'hidden' }]}>
+      <View
+        style={[
+          styles.cardImageWrapper,
+          { borderRadius: radii.lg, overflow: "hidden" },
+        ]}
+      >
         {recipe.imageUrl ? (
           <Image
             source={{ uri: recipe.imageUrl }}
@@ -115,7 +131,12 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
           />
         ) : null}
         {/* Dark overlay so text always reads well */}
-        <View style={[styles.cardImageOverlay, { backgroundColor: 'rgba(0,0,0,0.45)' }]} />
+        <View
+          style={[
+            styles.cardImageOverlay,
+            { backgroundColor: "rgba(0,0,0,0.45)" },
+          ]}
+        />
         {/* Monogram fallback */}
         <Text style={[styles.cardMonogram, { color: colors.textAccent }]}>
           {recipe.name.charAt(0)}
@@ -126,7 +147,10 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
       <View style={[styles.cardContent, { padding: spacing.md }]}>
         <View style={styles.cardHeader}>
           <Text
-            style={[textStyles.recipeName, { color: colors.textPrimary, flex: 1, marginRight: spacing.sm }]}
+            style={[
+              textStyles.recipeName,
+              { color: colors.textPrimary, flex: 1, marginRight: spacing.sm },
+            ]}
             numberOfLines={1}
           >
             {recipe.name}
@@ -135,17 +159,35 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
         </View>
 
         <Text
-          style={[textStyles.bodySmall, { color: colors.textSecondary, marginTop: spacing.xs }]}
+          style={[
+            textStyles.bodySmall,
+            { color: colors.textSecondary, marginTop: spacing.xs },
+          ]}
           numberOfLines={2}
         >
           {recipe.description}
         </Text>
 
-        <View style={[styles.cardMeta, { borderTopColor: colors.borderSubtle, marginTop: spacing.md }]}>
-          <Text style={[textStyles.label, { color: colors.textSecondary, fontSize: 10 }]}>
+        <View
+          style={[
+            styles.cardMeta,
+            { borderTopColor: colors.borderSubtle, marginTop: spacing.md },
+          ]}
+        >
+          <Text
+            style={[
+              textStyles.label,
+              { color: colors.textSecondary, fontSize: 10 },
+            ]}
+          >
             ⏱ {recipe.agingTimeHours}h aging
           </Text>
-          <Text style={[textStyles.label, { color: colors.textSecondary, fontSize: 10 }]}>
+          <Text
+            style={[
+              textStyles.label,
+              { color: colors.textSecondary, fontSize: 10 },
+            ]}
+          >
             ⚖️ {recipe.baseWeightGrams / 1000}kg batch
           </Text>
         </View>
@@ -157,25 +199,31 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
 // ─── Home Screen ──────────────────────────────────────────────────────────────
 export default function HomeScreen() {
   const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
 
   const filteredRecipes = useMemo(() => {
     const q = searchQuery.toLowerCase();
     if (!q) return MOCK_RECIPES;
     return MOCK_RECIPES.filter(
-      r =>
+      (r) =>
         r.name.toLowerCase().includes(q) ||
-        r.category.toLowerCase().includes(q)
+        r.category.toLowerCase().includes(q),
     );
   }, [searchQuery]);
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.bgPrimary }]}>
+    <SafeAreaProvider
+      initialMetrics={initialWindowMetrics}
+      style={[styles.safeArea, { backgroundColor: colors.bgPrimary }]}
+    >
       <FlatList
         data={filteredRecipes}
-        keyExtractor={item => item.id}
-        contentContainerStyle={[styles.listContent, { paddingHorizontal: spacing.md }]}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={[
+          styles.listContent,
+          { paddingHorizontal: spacing.md },
+        ]}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <>
@@ -187,7 +235,12 @@ export default function HomeScreen() {
                   Recipe Buddy
                 </Text>
               </View>
-              <Text style={[textStyles.label, { color: colors.textSecondary, marginTop: spacing.xs }]}>
+              <Text
+                style={[
+                  textStyles.label,
+                  { color: colors.textSecondary, marginTop: spacing.xs },
+                ]}
+              >
                 Sweet Madness by Geir Tengs
               </Text>
             </View>
@@ -199,15 +252,21 @@ export default function HomeScreen() {
                 {
                   backgroundColor: colors.bgSecondary,
                   borderRadius: radii.full,
-                  borderColor: searchFocused ? colors.borderAccent : colors.borderSubtle,
+                  borderColor: searchFocused
+                    ? colors.borderAccent
+                    : colors.borderSubtle,
                   marginVertical: spacing.lg,
-                  ...(mode === 'dark' ? shadows.sm : shadows.cardLight),
+                  ...(mode === "dark" ? shadows.sm : shadows.cardLight),
                 },
               ]}
             >
               <Text style={styles.searchIcon}>🔍</Text>
               <TextInput
-                style={[textStyles.body, styles.searchInput, { color: colors.textPrimary }]}
+                style={[
+                  textStyles.body,
+                  styles.searchInput,
+                  { color: colors.textPrimary },
+                ]}
                 placeholder="Search flavors (e.g. Pistachio, Sorbet)…"
                 placeholderTextColor={colors.textSecondary}
                 value={searchQuery}
@@ -220,8 +279,14 @@ export default function HomeScreen() {
             </View>
 
             {/* ── Section label ── */}
-            <Text style={[textStyles.label, { color: colors.textSecondary, marginBottom: spacing.md }]}>
-              {filteredRecipes.length} {filteredRecipes.length === 1 ? 'Recipe' : 'Recipes'}
+            <Text
+              style={[
+                textStyles.label,
+                { color: colors.textSecondary, marginBottom: spacing.md },
+              ]}
+            >
+              {filteredRecipes.length}{" "}
+              {filteredRecipes.length === 1 ? "Recipe" : "Recipes"}
             </Text>
           </>
         }
@@ -232,14 +297,23 @@ export default function HomeScreen() {
         )}
         ListEmptyComponent={
           <View style={styles.emptyState}>
-            <Text style={[textStyles.h3, { color: colors.textSecondary }]}>No results</Text>
-            <Text style={[textStyles.bodySmall, { color: colors.textSecondary, marginTop: spacing.sm }]}>
-              No recipes matching "{searchQuery}"
+            <Text style={[textStyles.h3, { color: colors.textSecondary }]}>
+              No results
+            </Text>
+            <Text
+              style={[
+                textStyles.bodySmall,
+                { color: colors.textSecondary, marginTop: spacing.sm },
+              ]}
+            >
+              No recipes matching &quot;{searchQuery}&quot;
             </Text>
           </View>
         }
         // Bottom padding so FAB doesn't cover last card
-        ListFooterComponent={<View style={{ height: spacing.xxxl + spacing.xl }} />}
+        ListFooterComponent={
+          <View style={{ height: spacing.xxxl + spacing.xl }} />
+        }
       />
 
       {/* ── Floating Action Button ── */}
@@ -258,37 +332,72 @@ export default function HomeScreen() {
               shadowRadius: 16,
               elevation: 12,
             },
-            pressed && { transform: [{ scale: 0.94 }], backgroundColor: colors.accentPressed },
+            pressed && {
+              transform: [{ scale: 0.94 }],
+              backgroundColor: colors.accentPressed,
+            },
           ]}
         >
-          <Text style={[textStyles.button, styles.fabText, { color: colors.bgPrimary }]}>
+          <Text
+            style={[
+              textStyles.button,
+              styles.fabText,
+              { color: colors.bgPrimary },
+            ]}
+          >
             + New Recipe
           </Text>
         </Pressable>
       </Link>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea:       { flex: 1 },
-  listContent:    { flexGrow: 1 },
-  header:         { alignItems: 'center', marginBottom: 4 },
-  logoRow:        { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  logoEmoji:      { fontSize: 28 },
-  searchWrapper:  { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 14, borderWidth: 1 },
-  searchIcon:     { fontSize: 16, marginRight: 10 },
-  searchInput:    { flex: 1, padding: 0 },
-  card:           { borderWidth: 1, overflow: 'hidden' },
-  cardImageWrapper: { height: 170, justifyContent: 'center', alignItems: 'center' },
-  cardImage:      { position: 'absolute', width: '100%', height: '100%' },
-  cardImageOverlay: { position: 'absolute', width: '100%', height: '100%' },
-  cardMonogram:   { fontSize: 48, fontWeight: '700', opacity: 0.6 },
-  cardContent:    { gap: 0 },
-  cardHeader:     { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  cardMeta:       { flexDirection: 'row', justifyContent: 'space-between', borderTopWidth: 1, paddingTop: 12, marginTop: 12 },
-  badge:          { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 9999 },
-  emptyState:     { alignItems: 'center', paddingVertical: 60 },
-  fab:            { position: 'absolute', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 24, paddingVertical: 16 },
-  fabText:        { marginLeft: 0 },
+  safeArea: { flex: 1 },
+  listContent: { flexGrow: 1 },
+  header: { alignItems: "center", marginBottom: 4 },
+  logoRow: { flexDirection: "row", alignItems: "center", gap: 10 },
+  logoEmoji: { fontSize: 28 },
+  searchWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    borderWidth: 1,
+  },
+  searchIcon: { fontSize: 16, marginRight: 10 },
+  searchInput: { flex: 1, padding: 0 },
+  card: { borderWidth: 1, overflow: "hidden" },
+  cardImageWrapper: {
+    height: 170,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cardImage: { position: "absolute", width: "100%", height: "100%" },
+  cardImageOverlay: { position: "absolute", width: "100%", height: "100%" },
+  cardMonogram: { fontSize: 48, fontWeight: "700", opacity: 0.6 },
+  cardContent: { gap: 0 },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  cardMeta: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderTopWidth: 1,
+    paddingTop: 12,
+    marginTop: 12,
+  },
+  badge: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 9999 },
+  emptyState: { alignItems: "center", paddingVertical: 60 },
+  fab: {
+    position: "absolute",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+  },
+  fabText: { marginLeft: 0 },
 });

@@ -12,8 +12,8 @@ import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
-import { useTheme } from "../ThemeContext";
-import { Recipe, Ingredient } from "../types";
+import { useTheme } from "@/ThemeContext";
+import { Recipe, Ingredient } from "@/types";
 import { fontSizes } from "@/theme";
 
 // ─── Mock Recipe ──────────────────────────────────────────────────────────────
