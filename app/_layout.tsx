@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import { ThemeProvider, useTheme } from '../ThemeContext';
+import { useEffect } from "react";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { ThemeProvider, useTheme } from "../ThemeContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -12,12 +12,12 @@ function RootLayoutNav() {
 
   return (
     <>
-      <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
+      <StatusBar style={mode === "dark" ? "light" : "dark"} />
       <Stack
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: colors.bgPrimary },
-          animation: 'slide_from_right',
+          animation: "slide_from_right",
         }}
       >
         <Stack.Screen name="index" />
@@ -27,7 +27,7 @@ function RootLayoutNav() {
           name="recipe/[id]/cook"
           options={{
             // Cook mode slides up like a modal — feels intentional and focused
-            animation: 'slide_from_bottom',
+            animation: "slide_from_bottom",
             gestureEnabled: false, // prevent accidental swipe-dismiss mid-batch
           }}
         />
@@ -38,13 +38,8 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
-    'Inter':              require('../assets/fonts/Inter-Regular.ttf'),
-    'Inter-Medium':       require('../assets/fonts/Inter-Medium.ttf'),
-    'Inter-SemiBold':     require('../assets/fonts/Inter-SemiBold.ttf'),
-    'Inter-Bold':         require('../assets/fonts/Inter-Bold.ttf'),
-    'PlayfairDisplay-Regular': require('../assets/fonts/PlayfairDisplay-Regular.ttf'),
-    'PlayfairDisplay-Italic':  require('../assets/fonts/PlayfairDisplay-Italic.ttf'),
-    'PlayfairDisplay-Bold':    require('../assets/fonts/PlayfairDisplay-Bold.ttf'),
+    Inter: require("../assets/fonts/Inter-VariableFont_opsz,wght.ttf"),
+    PlayfairDisplay: require("../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf"),
   });
 
   useEffect(() => {
