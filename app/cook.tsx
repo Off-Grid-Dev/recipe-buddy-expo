@@ -4,13 +4,17 @@ import {
   Text,
   StyleSheet,
   Pressable,
-  SafeAreaView,
   Animated,
   Alert,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from "react-native-safe-area-context";
 import { useTheme } from "../ThemeContext";
 import { Recipe, Ingredient } from "../types";
+import { fontSizes } from "@/theme";
 
 // ─── Mock Recipe ──────────────────────────────────────────────────────────────
 const MOCK_RECIPE: Recipe = {
@@ -55,7 +59,7 @@ type StatusType = "add" | "perfect" | "remove";
 
 // ─── Cook Screen ──────────────────────────────────────────────────────────────
 export default function CookScreen() {
-  const { colors, spacing, radii, textStyles } = useTheme();
+  const { colors, spacing, radii, textStyles, fontSizes } = useTheme();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 
@@ -95,7 +99,7 @@ export default function CookScreen() {
       duration: 180,
       useNativeDriver: false,
     }).start();
-  }, [progressPercent]);
+  }, [progressPercent, progressAnim]);
 
   // ── Pulse animation for overweight alert ──────────────────────────────────
   const pulseAnim = useRef(new Animated.Value(0)).current;
@@ -187,7 +191,8 @@ export default function CookScreen() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <SafeAreaView
+    <SafeAreaProvider
+      initialMetrics={initialWindowMetrics}
       style={[styles.safeArea, { backgroundColor: colors.bgPrimary }]}
     >
       {/* ── Cook Header ── */}
@@ -286,9 +291,10 @@ export default function CookScreen() {
             </Animated.Text>
             <Text
               style={[
-                textStyles.xl,
+                textStyles.body,
                 {
                   color: colors.textSecondary,
+                  fontSize: fontSizes.xl,
                   alignSelf: "flex-end",
                   marginBottom: 12,
                   marginLeft: 6,
@@ -553,7 +559,7 @@ export default function CookScreen() {
           </Text>
         </Pressable>
       </View>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
@@ -590,5 +596,4 @@ const styles = StyleSheet.create({
   navBtn: { paddingVertical: 12, paddingHorizontal: 8 },
   stepDots: { flexDirection: "row", alignItems: "center", gap: 5 },
   dot: { height: 6, borderRadius: 3 },
-  xl: { fontSize: 22 },
 });
