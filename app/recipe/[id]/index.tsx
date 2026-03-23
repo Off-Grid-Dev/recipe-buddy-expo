@@ -7,10 +7,6 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
-import {
-  SafeAreaProvider,
-  initialWindowMetrics,
-} from "react-native-safe-area-context";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
 import { useTheme } from "../../../ThemeContext";
 import { Recipe, IngredientGroup } from "../../../types";
@@ -114,10 +110,8 @@ export default function RecipeOverviewScreen() {
   );
 
   return (
-    <SafeAreaProvider
-      initialMetrics={initialWindowMetrics}
-      style={[styles.safeArea, { backgroundColor: colors.bgPrimary }]}
-    >
+    <
+      >
       <ScrollView
         contentContainerStyle={[
           styles.scrollContent,
@@ -463,12 +457,11 @@ export default function RecipeOverviewScreen() {
           </Text>
         </Pressable>
       </View>
-    </SafeAreaProvider>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1 },
   scrollContent: { flexGrow: 1 },
   backLink: { alignSelf: "flex-start", paddingVertical: 8, marginBottom: 8 },
   recipeHeader: { borderBottomWidth: 1 },

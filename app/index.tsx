@@ -7,12 +7,8 @@ import {
   TextInput,
   Pressable,
   Image,
-  StatusBar,
+  // StatusBar,
 } from "react-native";
-import {
-  SafeAreaProvider,
-  initialWindowMetrics,
-} from "react-native-safe-area-context";
 import { Link, useRouter } from "expo-router";
 import { useTheme } from "../ThemeContext";
 import { Recipe } from "../types";
@@ -213,10 +209,8 @@ export default function HomeScreen() {
   }, [searchQuery]);
 
   return (
-    <SafeAreaProvider
-      initialMetrics={initialWindowMetrics}
-      style={[styles.safeArea, { backgroundColor: colors.bgPrimary }]}
-    >
+    <
+      >
       <FlatList
         data={filteredRecipes}
         keyExtractor={(item) => item.id}
@@ -349,7 +343,7 @@ export default function HomeScreen() {
           </Text>
         </Pressable>
       </Link>
-    </SafeAreaProvider>
+    </>
   );
 }
 

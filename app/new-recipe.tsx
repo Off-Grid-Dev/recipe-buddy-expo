@@ -6,7 +6,6 @@ import {
   ScrollView,
   TextInput,
   Pressable,
-  SafeAreaView,
   Alert,
   KeyboardAvoidingView,
   Platform,
@@ -122,11 +121,11 @@ export default function NewRecipeScreen() {
   const router = useRouter();
 
   // Basic fields
-  const [recipeName,        setRecipeName]        = useState('');
-  const [description,       setDescription]       = useState('');
-  const [category,          setCategory]          = useState<RecipeCategory>('gelato');
-  const [baseWeight,        setBaseWeight]        = useState('5000');
-  const [agingTime,         setAgingTime]         = useState('12');
+  const [recipeName, setRecipeName] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState<RecipeCategory>('gelato');
+  const [baseWeight, setBaseWeight] = useState('5000');
+  const [agingTime, setAgingTime] = useState('12');
 
   // Ingredients
   const [ingredients, setIngredients] = useState<Ingredient[]>([
@@ -136,7 +135,7 @@ export default function NewRecipeScreen() {
   const [weightInputs, setWeightInputs] = useState<number[]>([0]);
 
   const totalPercentage = ingredients.reduce((sum, i) => sum + i.percentage, 0);
-  const totalWeight     = weightInputs.reduce((sum, w) => sum + w, 0);
+  const totalWeight = weightInputs.reduce((sum, w) => sum + w, 0);
 
   const addIngredient = useCallback(() => {
     const newId = String(Date.now());
@@ -176,26 +175,26 @@ export default function NewRecipeScreen() {
   };
 
   const categoryOptions = [
-    { label: 'Gelato',    value: 'gelato' },
-    { label: 'Sorbetto',  value: 'sorbetto' },
-    { label: 'Crema',     value: 'crema' },
+    { label: 'Gelato', value: 'gelato' },
+    { label: 'Sorbetto', value: 'sorbetto' },
+    { label: 'Crema', value: 'crema' },
   ];
 
   const modeOptions = [
     { label: 'By Percentage', value: 'percentage' },
-    { label: 'By Weight',     value: 'weight' },
+    { label: 'By Weight', value: 'weight' },
   ];
 
   const groupOptions: { label: string; value: IngredientGroup }[] = [
-    { label: 'Liquids',     value: 'liquids' },
-    { label: 'Sugars',      value: 'sugars' },
-    { label: 'Solids',      value: 'solids' },
+    { label: 'Liquids', value: 'liquids' },
+    { label: 'Sugars', value: 'sugars' },
+    { label: 'Solids', value: 'solids' },
     { label: 'Stabilizers', value: 'stabilizers' },
-    { label: 'Flavorings',  value: 'flavorings' },
+    { label: 'Flavorings', value: 'flavorings' },
   ];
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.bgPrimary }]}>
+    <>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -478,26 +477,25 @@ export default function NewRecipeScreen() {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea:              { flex: 1 },
-  scrollContent:         { flexGrow: 1 },
-  backLink:              { alignSelf: 'flex-start', paddingVertical: 8, marginBottom: 8 },
-  pageHeader:            { borderBottomWidth: 1 },
-  section:               { borderWidth: 1 },
-  twoCol:                { flexDirection: 'row' },
-  formInput:             { borderWidth: 1, paddingHorizontal: 14, paddingVertical: 12 },
-  segmented:             { flexDirection: 'row', padding: 4 },
-  segmentedOption:       { flex: 1, alignItems: 'center', paddingVertical: 10 },
-  ingredientCard:        { borderWidth: 1 },
-  ingredientCardHeader:  { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  groupCycler:           {},
-  addBtn:                { borderWidth: 1.5, borderStyle: 'dashed', alignItems: 'center', marginTop: 4 },
-  totalsRow:             { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderTopWidth: 1 },
-  submitRow:             { flexDirection: 'column', marginTop: 8 },
-  submitBtn:             { alignItems: 'center' },
-  cancelBtn:             { alignItems: 'center' },
+  scrollContent: { flexGrow: 1 },
+  backLink: { alignSelf: 'flex-start', paddingVertical: 8, marginBottom: 8 },
+  pageHeader: { borderBottomWidth: 1 },
+  section: { borderWidth: 1 },
+  twoCol: { flexDirection: 'row' },
+  formInput: { borderWidth: 1, paddingHorizontal: 14, paddingVertical: 12 },
+  segmented: { flexDirection: 'row', padding: 4 },
+  segmentedOption: { flex: 1, alignItems: 'center', paddingVertical: 10 },
+  ingredientCard: { borderWidth: 1 },
+  ingredientCardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  groupCycler: {},
+  addBtn: { borderWidth: 1.5, borderStyle: 'dashed', alignItems: 'center', marginTop: 4 },
+  totalsRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderTopWidth: 1 },
+  submitRow: { flexDirection: 'column', marginTop: 8 },
+  submitBtn: { alignItems: 'center' },
+  cancelBtn: { alignItems: 'center' },
 });

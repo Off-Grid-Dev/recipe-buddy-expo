@@ -8,13 +8,9 @@ import {
   Alert,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import {
-  SafeAreaProvider,
-  initialWindowMetrics,
-} from "react-native-safe-area-context";
-import { useTheme } from "@/ThemeContext";
-import { Recipe, Ingredient } from "@/types";
-import { fontSizes } from "@/theme";
+import { useTheme } from "../../../ThemeContext";
+import { Recipe, Ingredient } from "../../../types";
+import { fontSizes } from "../../../theme";
 
 // ─── Mock Recipe ──────────────────────────────────────────────────────────────
 const MOCK_RECIPE: Recipe = {
@@ -191,10 +187,8 @@ export default function CookScreen() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <SafeAreaProvider
-      initialMetrics={initialWindowMetrics}
-      style={[styles.safeArea, { backgroundColor: colors.bgPrimary }]}
-    >
+    <
+      >
       {/* ── Cook Header ── */}
       <View
         style={[
@@ -276,35 +270,6 @@ export default function CookScreen() {
             {currentIngredient.name}
           </Text>
 
-          {/* Weight display — the hero of the screen */}
-          <View style={styles.weightRow}>
-            <Animated.Text
-              style={[
-                textStyles.weightDisplay,
-                {
-                  color: statusConfig[status].color,
-                  // Subtle shift when overweight
-                },
-              ]}
-            >
-              {scaleWeight.toFixed(1)}
-            </Animated.Text>
-            <Text
-              style={[
-                textStyles.body,
-                {
-                  color: colors.textSecondary,
-                  fontSize: fontSizes.xl,
-                  alignSelf: "flex-end",
-                  marginBottom: 12,
-                  marginLeft: 6,
-                },
-              ]}
-            >
-              g
-            </Text>
-          </View>
-
           {/* Target info */}
           <Text
             style={[
@@ -324,88 +289,13 @@ export default function CookScreen() {
               {"  "}({currentIngredient.percentage}%)
             </Text>
           </Text>
-
-          {/* Status message */}
-          <Text
-            style={[
-              textStyles.label,
-              {
-                color: statusConfig[status].color,
-                textAlign: "center",
-                marginBottom: spacing.md,
-                letterSpacing: 1.2,
-              },
-            ]}
-          >
-            {statusConfig[status].text}
-          </Text>
-
-          {/* Progress bar */}
-          <View
-            style={[
-              styles.progressTrack,
-              { backgroundColor: colors.bgTertiary, borderRadius: radii.full },
-            ]}
-          >
-            <Animated.View
-              style={[
-                styles.progressFill,
-                {
-                  borderRadius: radii.full,
-                  backgroundColor: progressColor[status],
-                  width: progressAnim.interpolate({
-                    inputRange: [0, 100],
-                    outputRange: ["0%", "100%"],
-                    extrapolate: "clamp",
-                  }),
-                },
-              ]}
-            />
-          </View>
         </View>
 
         {/* ── Controls ── */}
         <View
           style={[styles.controls, { marginTop: spacing.md, gap: spacing.sm }]}
         >
-          <Pressable
-            onPress={handleTare}
-            style={({ pressed }) => [
-              styles.controlBtn,
-              {
-                backgroundColor: pressed
-                  ? colors.bgElevated
-                  : colors.bgTertiary,
-                borderRadius: radii.md,
-                paddingVertical: spacing.md + 2,
-              },
-            ]}
-          >
-            <Text style={[textStyles.button, { color: colors.textPrimary }]}>
-              Tare Scale
-            </Text>
-          </Pressable>
-
-          {isAdjusting ? (
-            <Pressable
-              onPress={() => setIsAdjusting(false)}
-              style={({ pressed }) => [
-                styles.controlBtn,
-                styles.controlBtnWide,
-                {
-                  backgroundColor: pressed
-                    ? colors.success + "cc"
-                    : colors.success,
-                  borderRadius: radii.md,
-                  paddingVertical: spacing.md + 2,
-                },
-              ]}
-            >
-              <Text style={[textStyles.button, { color: colors.bgPrimary }]}>
-                Confirm Adjustment
-              </Text>
-            </Pressable>
-          ) : isComplete ? (
+          {isComplete ? (
             <Pressable
               onPress={advanceStep}
               style={({ pressed }) => [
@@ -555,16 +445,15 @@ export default function CookScreen() {
           ]}
         >
           <Text style={[textStyles.body, { color: colors.textSecondary }]}>
-            Skip →
+            Next →
           </Text>
         </Pressable>
       </View>
-    </SafeAreaProvider>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1 },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",

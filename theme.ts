@@ -363,7 +363,7 @@ export const zIndex = {
 // ─────────────────────────────────────────────────────────────────────────────
 export type ThemeMode = "dark" | "light";
 
-export const getTheme = (mode: ThemeMode = "dark") =>
+export const getTheme = (mode: ThemeMode = "light") =>
   ({
     colors: mode === "dark" ? darkColors : lightColors,
     fonts,
@@ -381,5 +381,5 @@ export const getTheme = (mode: ThemeMode = "dark") =>
 
 export type Theme = ReturnType<typeof getTheme>;
 
-const theme = getTheme("dark");
+const theme = getTheme("light");
 export default theme;

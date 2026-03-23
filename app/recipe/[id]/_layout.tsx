@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { useTheme } from "@/ThemeContext";
+import { useTheme } from "../../../ThemeContext";
 
 export default function RecipeLayout() {
   const { colors } = useTheme();
