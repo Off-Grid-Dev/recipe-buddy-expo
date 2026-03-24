@@ -8,6 +8,7 @@ import {
   Alert,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "../../../ThemeContext";
 import { Recipe, Ingredient } from "../../../types";
 import { fontSizes } from "../../../theme";
@@ -56,6 +57,7 @@ type StatusType = "add" | "perfect" | "remove";
 // ─── Cook Screen ──────────────────────────────────────────────────────────────
 export default function CookScreen() {
   const { colors, spacing, radii, textStyles, fontSizes } = useTheme();
+  const { top, right, bottom, left } = useSafeAreaInsets();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 
@@ -187,8 +189,13 @@ export default function CookScreen() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <
-      >
+    <View style={{
+      paddingTop: top,
+      paddingRight: right,
+      paddingBottom: bottom,
+      paddingLeft: left,
+    }}
+    >
       {/* ── Cook Header ── */}
       <View
         style={[
@@ -449,7 +456,7 @@ export default function CookScreen() {
           </Text>
         </Pressable>
       </View>
-    </>
+    </View>
   );
 }
 

@@ -11,6 +11,7 @@ import {
   Platform,
 } from 'react-native';
 import { Link, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '../ThemeContext';
 import { Ingredient, IngredientGroup, RecipeCategory } from '../types';
 
@@ -84,7 +85,10 @@ function SegmentedControl({
   const { colors, radii, textStyles } = useTheme();
 
   return (
-    <View style={[styles.segmented, { backgroundColor: colors.bgTertiary, borderRadius: radii.md }]}>
+    <View style={[styles.segmented, {
+      backgroundColor: colors.bgTertiary,
+      borderRadius: radii.md,
+    }]}>
       {options.map(opt => {
         const active = opt.value === value;
         return (
@@ -118,6 +122,7 @@ function SegmentedControl({
 // ─── New Recipe Screen ────────────────────────────────────────────────────────
 export default function NewRecipeScreen() {
   const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
+  const { top, right, bottom, left } = useSafeAreaInsets();
   const router = useRouter();
 
   // Basic fields
@@ -196,7 +201,13 @@ export default function NewRecipeScreen() {
   return (
     <>
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
+        style={{
+          flex: 1,
+          paddingTop: top,
+          paddingRight: right,
+          paddingBottom: bottom,
+          paddingLeft: left,
+        }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={0}
       >
@@ -226,7 +237,13 @@ export default function NewRecipeScreen() {
           </View>
 
           {/* ── Basic Info Section ── */}
-          <View style={[styles.section, { backgroundColor: colors.bgSecondary, borderRadius: radii.lg, borderColor: colors.borderSubtle, padding: spacing.lg, marginBottom: spacing.md, ...(mode === 'dark' ? shadows.sm : shadows.cardLight) }]}>
+          <View style={[styles.section, {
+            backgroundColor: colors.bgSecondary,
+            borderRadius: radii.lg,
+            borderColor: colors.borderSubtle,
+            padding: spacing.lg,
+            marginBottom: spacing.md, ...(mode === 'dark' ? shadows.sm : shadows.cardLight)
+          }]}>
             <Text style={[textStyles.h3, { color: colors.textPrimary, marginBottom: spacing.lg }]}>
               Basic Information
             </Text>

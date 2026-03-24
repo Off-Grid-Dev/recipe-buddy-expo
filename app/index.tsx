@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { useTheme } from "../ThemeContext";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Recipe } from "../types";
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
@@ -195,6 +196,7 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
 // ─── Home Screen ──────────────────────────────────────────────────────────────
 export default function HomeScreen() {
   const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
+  const { top, right, bottom, left } = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
 
@@ -209,8 +211,8 @@ export default function HomeScreen() {
   }, [searchQuery]);
 
   return (
-    <
-      >
+    <View style={{ paddingTop: top, paddingRight: right, paddingBottom: bottom, paddingLeft: left, }}
+    >
       <FlatList
         data={filteredRecipes}
         keyExtractor={(item) => item.id}
@@ -343,7 +345,7 @@ export default function HomeScreen() {
           </Text>
         </Pressable>
       </Link>
-    </>
+    </View>
   );
 }
 
