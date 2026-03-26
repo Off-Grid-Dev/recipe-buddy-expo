@@ -11,7 +11,7 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "../../../ThemeContext";
 import { Recipe, Ingredient } from "../../../types";
-import { fontSizes } from "../../../theme";
+import { fontSizes, fontWeights } from "../../../theme";
 
 // ─── Mock Recipe ──────────────────────────────────────────────────────────────
 const MOCK_RECIPE: Recipe = {
@@ -231,7 +231,11 @@ export default function CookScreen() {
           <Text
             style={[
               textStyles.label,
-              { color: colors.textAccent, textAlign: "right", fontSize: 10 },
+              {
+                color: colors.textAccent,
+                textAlign: "right",
+                fontSize: fontSizes.xxs,
+              },
             ]}
           >
             {currentStepIndex + 1} / {recipe.ingredients.length}
@@ -258,7 +262,7 @@ export default function CookScreen() {
               textStyles.label,
               {
                 color: colors.textSecondary,
-                fontSize: 10,
+                fontSize: fontSizes.xxs,
                 textAlign: "center",
                 marginBottom: spacing.xs,
               },
@@ -291,7 +295,12 @@ export default function CookScreen() {
             ]}
           >
             Target:{" "}
-            <Text style={{ color: colors.textPrimary, fontWeight: "700" }}>
+            <Text
+              style={{
+                color: colors.textPrimary,
+                fontWeight: fontWeights.bold,
+              }}
+            >
               {targetWeight.toFixed(1)}g
             </Text>
             <Text style={{ color: colors.textAccent }}>
@@ -358,7 +367,7 @@ export default function CookScreen() {
                 textStyles.body,
                 {
                   color: colors.error,
-                  fontWeight: "700",
+                  fontWeight: fontWeights.bold,
                   marginBottom: spacing.xxs,
                 },
               ]}

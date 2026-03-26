@@ -9,6 +9,7 @@ const palette = {
   slate800: "#252932",
   slate700: "#323744",
   slate600: "#434957",
+  slate500: "#4b6178",
   slate400: "#94a3b8",
   slate200: "#cbd5e1",
 
@@ -37,22 +38,27 @@ const palette = {
 // SEMANTIC COLOR TOKENS — use these in components, never raw palette
 // ─────────────────────────────────────────────────────────────────────────────
 export type ColorTheme = {
+  // background colors
   bgPrimary: string;
   bgSecondary: string;
   bgTertiary: string;
   bgElevated: string;
+  // typography
   textPrimary: string;
   textSecondary: string;
   textAccent: string;
   textAccentPressed: string;
   textDisabled: string;
+  // semaphores
   success: string;
   error: string;
   warning: string;
+  // accent colors
   accentPrimary: string;
   accentPressed: string;
   accentSubtle: string;
   accentGlow: string;
+  // layout colros
   borderSubtle: string;
   borderDefault: string;
   borderAccent: string;
@@ -85,7 +91,8 @@ export const darkColors = {
 
   accentPrimary: palette.mint400,
   accentPressed: palette.mint500,
-  accentSubtle: "rgba(125, 211, 192, 0.12)",
+  // accentSubtle: "rgba(125, 211, 192, 0.12)",
+  accentSubtle: `color(from ${palette.slate500} r g b / 0.12)`,
   accentGlow: "rgba(125, 211, 192, 0.25)",
 
   borderSubtle: "rgba(255, 255, 255, 0.05)",
