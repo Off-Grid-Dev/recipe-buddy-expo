@@ -10,6 +10,7 @@ const palette = {
   slate700: "#323744",
   slate600: "#434957",
   slate500: "#4b6178",
+  slate450: "#6b7280",
   slate400: "#94a3b8",
   slate200: "#cbd5e1",
 
@@ -93,21 +94,28 @@ export const darkColors = {
   accentPressed: palette.mint500,
   // accentSubtle: "rgba(125, 211, 192, 0.12)",
   accentSubtle: `color(from ${palette.slate500} r g b / 0.12)`,
-  accentGlow: "rgba(125, 211, 192, 0.25)",
+  // accentGlow: "rgba(125, 211, 192, 0.25)",
+  accentGlow: `color(from ${palette.slate500} r g b / 0.25)`,
 
-  borderSubtle: "rgba(255, 255, 255, 0.05)",
-  borderDefault: "rgba(255, 255, 255, 0.10)",
+  // borderSubtle: "rgba(255, 255, 255, 0.05)",
+  borderSubtle: `color(from ${palette.slate500} r g b / 0.05)`,
+  // borderDefault: "rgba(255, 255, 255, 0.10)",
+  borderDefault: `color(from ${palette.mint400} r g b / 0.10)`,
   borderAccent: palette.mint400,
 
-  overlay: "rgba(0, 0, 0, 0.65)",
+  // overlay: "rgba(0, 0, 0, 0.65)",
+  overlay: `color(from ${palette.black} r g b / 0.05)`,
   scrim: "rgba(15, 17, 21, 0.92)",
 
   // Badge-specific
-  badgeGelato: "rgba(125, 211, 192, 0.18)",
+  // badgeGelato: "rgba(125, 211, 192, 0.18)",
+  badgeGelato: `color(from ${palette.mint400} r g b / 0.18)`,
   badgeGelatoText: palette.mint400,
-  badgeSorbetto: "rgba(251, 191, 36, 0.18)",
+  // badgeSorbetto: "rgba(251, 191, 36, 0.18)",
+  badgeSorbetto: `color(from ${palette.amber400} r g b / 0.18)`,
   badgeSorbettoText: palette.amber400,
-  badgeCrema: "rgba(255, 255, 255, 0.08)",
+  // badgeCrema: "rgba(255, 255, 255, 0.08)",
+  badgeCrema: `color(from ${palette.black} r g b / 0.18)`,
   badgeCremaText: palette.slate400,
 } as const;
 
@@ -118,8 +126,8 @@ export const lightColors: ColorTheme = {
   bgTertiary: palette.cream200,
   bgElevated: palette.white,
 
-  textPrimary: "#1a1a1a",
-  textSecondary: "#6b7280",
+  textPrimary: palette.slate950,
+  textSecondary: palette.slate500,
   textAccent: palette.mint600,
   textAccentPressed: palette.mint500,
   textDisabled: palette.cream300,
@@ -130,22 +138,30 @@ export const lightColors: ColorTheme = {
 
   accentPrimary: palette.mint600,
   accentPressed: palette.mint500,
-  accentSubtle: "rgba(63, 168, 155, 0.10)",
-  accentGlow: "rgba(63, 168, 155, 0.20)",
+  // accentSubtle: "rgba(63, 168, 155, 0.10)",
+  accentSubtle: `color(from ${palette.mint600} r g b / 0.1)`,
+  // accentGlow: "rgba(63, 168, 155, 0.20)",
+  accentGlow: `color(from ${palette.mint600} r g b / 0.2)`,
 
-  borderSubtle: "rgba(0, 0, 0, 0.05)",
-  borderDefault: "rgba(0, 0, 0, 0.10)",
+  // borderSubtle: "rgba(0, 0, 0, 0.05)",
+  borderSubtle: `color(from ${palette.black} r g b / 0.05)`,
+  // borderDefault: "rgba(0, 0, 0, 0.10)",
+  borderDefault: `color(from ${palette.black} r g b / 0.1)`,
   borderAccent: palette.mint600,
 
-  overlay: "rgba(0, 0, 0, 0.4)",
-  scrim: "rgba(250, 248, 243, 0.92)",
+  // overlay: "rgba(0, 0, 0, 0.4)",
+  overlay: `color(from ${palette.black} r g b / 0.4)`,
+  scrim: palette.cream50,
 
-  badgeGelato: "rgba(63, 168, 155, 0.12)",
+  // badgeGelato: "rgba(63, 168, 155, 0.12)",
+  badgeGelato: `color(from ${palette.mint600} r g b / 0.12)`,
   badgeGelatoText: palette.mint600,
-  badgeSorbetto: "rgba(217, 119, 6, 0.12)",
+  // badgeSorbetto: "rgba(217, 119, 6, 0.12)",
+  badgeSorbetto: `color(from ${palette.amber600} r g b / 0.12)`,
   badgeSorbettoText: palette.amber600,
-  badgeCrema: "rgba(0, 0, 0, 0.06)",
-  badgeCremaText: "#6b7280",
+  // badgeCrema: "rgba(0, 0, 0, 0.06)",
+  badgeCrema: `color(from ${palette.black} r g b / 0.06)`,
+  badgeCremaText: palette.slate450,
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────

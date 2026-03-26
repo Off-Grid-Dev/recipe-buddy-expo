@@ -211,7 +211,13 @@ export default function HomeScreen() {
   }, [searchQuery]);
 
   return (
-    <View style={{ paddingTop: top, paddingRight: right, paddingBottom: bottom, paddingLeft: left, }}
+    <View
+      style={{
+        paddingTop: top,
+        paddingRight: right,
+        paddingBottom: bottom,
+        paddingLeft: left,
+      }}
     >
       <FlatList
         data={filteredRecipes}
