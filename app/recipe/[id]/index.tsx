@@ -10,6 +10,7 @@ import {
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
 import { useTheme } from "../../../ThemeContext";
 import { Recipe, IngredientGroup } from "../../../types";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // ─── Mock Data Loader ─────────────────────────────────────────────────────────
 // In production, replace with your actual data fetching (SQLite, API, etc.)
@@ -87,6 +88,7 @@ export default function RecipeOverviewScreen() {
   const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { top, right, bottom, left } = useSafeAreaInsets();
 
   // In production: fetch recipe by id. Using mock for now.
   const recipe = MOCK_RECIPE;
@@ -110,8 +112,7 @@ export default function RecipeOverviewScreen() {
   );
 
   return (
-    <
-      >
+    <View style={{ paddingTop: top }}>
       <ScrollView
         contentContainerStyle={[
           styles.scrollContent,
@@ -457,7 +458,7 @@ export default function RecipeOverviewScreen() {
           </Text>
         </Pressable>
       </View>
-    </>
+    </View>
   );
 }
 

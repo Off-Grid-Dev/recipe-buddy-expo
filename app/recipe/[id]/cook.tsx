@@ -189,12 +189,14 @@ export default function CookScreen() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <View style={{
-      paddingTop: top,
-      paddingRight: right,
-      paddingBottom: bottom,
-      paddingLeft: left,
-    }}
+    <View
+      style={{
+        flex: 1,
+        paddingTop: top,
+        paddingRight: right,
+        paddingBottom: bottom,
+        paddingLeft: left,
+      }}
     >
       {/* ── Cook Header ── */}
       <View

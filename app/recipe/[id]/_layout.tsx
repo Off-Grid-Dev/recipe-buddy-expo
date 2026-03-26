@@ -1,12 +1,15 @@
 import { Stack } from "expo-router";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import {
+  initialWindowMetrics,
+  SafeAreaProvider,
+} from "react-native-safe-area-context";
 import { useTheme } from "../../../ThemeContext";
 
 export default function RecipeLayout() {
   const { colors } = useTheme();
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <Stack
         screenOptions={{
           headerShown: false,
