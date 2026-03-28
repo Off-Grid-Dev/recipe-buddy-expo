@@ -7,7 +7,7 @@ import {
   TextInput,
   Pressable,
   Image,
-  // StatusBar,
+  Button,
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { useTheme } from "../context/ThemeContext";
@@ -195,7 +195,8 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
 
 // ─── Home Screen ──────────────────────────────────────────────────────────────
 export default function HomeScreen() {
-  const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
+  const { colors, spacing, radii, textStyles, shadows, mode, setMode } =
+    useTheme();
   const { top, right, bottom, left } = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
@@ -219,6 +220,11 @@ export default function HomeScreen() {
         paddingLeft: left,
       }}
     >
+      <Button
+        title="toggle theme"
+        onPress={() => setMode(mode === "dark" ? "light" : "dark")}
+      />
+
       <FlatList
         data={filteredRecipes}
         keyExtractor={(item) => item.id}
@@ -361,6 +367,9 @@ const styles = StyleSheet.create({
   header: { alignItems: "center", marginBottom: 4 },
   logoRow: { flexDirection: "row", alignItems: "center", gap: 10 },
   logoEmoji: { fontSize: 28 },
+  themeToggle: {
+    marginInline: "auto",
+  },
   searchWrapper: {
     flexDirection: "row",
     alignItems: "center",

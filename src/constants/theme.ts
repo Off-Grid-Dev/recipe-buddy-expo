@@ -4,25 +4,25 @@ import { Platform, Easing } from "react-native";
 // PALETTE — raw values, never reference in components directly
 // ─────────────────────────────────────────────────────────────────────────────
 const palette = {
-  slate950: "#0f1115",
-  slate900: "#1a1d24",
-  slate800: "#252932",
-  slate700: "#323744",
-  slate600: "#434957",
-  slate500: "#4b6178",
-  slate450: "#6b7280",
-  slate400: "#94a3b8",
   slate200: "#cbd5e1",
+  slate400: "#94a3b8",
+  slate450: "#6b7280",
+  slate500: "#4b6178",
+  slate600: "#434957",
+  slate700: "#323744",
+  slate800: "#252932",
+  slate900: "#1a1d24",
+  slate950: "#0f1115",
 
   cream50: "#faf8f3",
   cream100: "#f2ede0",
   cream200: "#e8e0cc",
   cream300: "#d4c9b0",
 
+  mint100: "#d1f5ef",
   mint400: "#7dd3c0",
   mint500: "#5dbdb0",
   mint600: "#3fa89b",
-  mint100: "#d1f5ef",
 
   green400: "#4ade80",
   green600: "#16a34a",
@@ -59,7 +59,7 @@ export type ColorTheme = {
   accentPressed: string;
   accentSubtle: string;
   accentGlow: string;
-  // layout colros
+  // layout colors
   borderSubtle: string;
   borderDefault: string;
   borderAccent: string;
