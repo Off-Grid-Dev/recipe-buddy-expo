@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useTheme } from "../../../ThemeContext";
+import { useTheme } from "../../../context/ThemeContext";
 import { Recipe, Ingredient } from "../../../types";
-import { fontSizes, fontWeights } from "../../../theme";
+import { fontSizes, fontWeights } from "../../../constants/theme";
 
 // ─── Mock Recipe ──────────────────────────────────────────────────────────────
 const MOCK_RECIPE: Recipe = {

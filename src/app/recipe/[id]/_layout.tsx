@@ -3,7 +3,7 @@ import {
   initialWindowMetrics,
   SafeAreaProvider,
 } from "react-native-safe-area-context";
-import { useTheme } from "../../../ThemeContext";
+import { useTheme } from "../../../context/ThemeContext";
 
 export default function RecipeLayout() {
   const { colors } = useTheme();

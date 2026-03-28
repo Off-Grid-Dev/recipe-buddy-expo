@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { ThemeProvider, useTheme } from "../ThemeContext";
+import { ThemeProvider, useTheme } from "../context/ThemeContext";
 import {
   SafeAreaProvider,
   initialWindowMetrics,
@@ -33,8 +33,8 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
-    Inter: require("../assets/fonts/Inter-VariableFont_opsz,wght.ttf"),
-    PlayfairDisplay: require("../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf"),
+    Inter: require("../../assets/fonts/Inter-VariableFont_opsz,wght.ttf"),
+    PlayfairDisplay: require("../../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf"),
   });
 
   useEffect(() => {

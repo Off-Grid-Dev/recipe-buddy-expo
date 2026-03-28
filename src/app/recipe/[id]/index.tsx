@@ -8,7 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
-import { useTheme } from "../../../ThemeContext";
+import { useTheme } from "../../../context/ThemeContext";
 import { Recipe, IngredientGroup } from "../../../types";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 

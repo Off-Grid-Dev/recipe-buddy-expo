@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
 import { useColorScheme } from "react-native";
-import { getTheme, ThemeMode, Theme } from "./theme";
+import { getTheme, ThemeMode, Theme } from "../constants/theme";
 
 type ThemeContextValue = Theme & {
   toggleTheme: () => void;

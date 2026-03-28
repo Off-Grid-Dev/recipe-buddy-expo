@@ -10,7 +10,7 @@ import {
   // StatusBar,
 } from "react-native";
 import { Link, useRouter } from "expo-router";
-import { useTheme } from "../ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Recipe } from "../types";
 
