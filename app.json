@@ -7,10 +7,12 @@
     "icon": "",
     "scheme": "recipebuddyexpo",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.recipebuddyexpo"
+      "bundleIdentifier": "com.anonymous.recipebuddyexpo",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +21,6 @@
         "backgroundImage": "",
         "monochromeImage": ""
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.anonymous.recipebuddyexpo"
     },
@@ -41,11 +42,19 @@
           }
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-image",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "aa793ac9-5bd7-4f97-89da-1428d331305c"
+      }
     }
   }
 }
