@@ -123,7 +123,12 @@ export default function RecipeOverviewScreen() {
       >
         {/* ── Back link ── */}
         <Link href="/" asChild>
-          <Pressable style={[styles.backLink, { marginTop: spacing.lg }]}>
+          <Pressable
+            style={StyleSheet.flatten([
+              styles.backLink,
+              { marginTop: spacing.lg },
+            ])}
+          >
             {({ pressed }) => (
               <Text
                 style={[

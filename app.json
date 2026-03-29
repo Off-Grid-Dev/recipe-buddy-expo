@@ -4,7 +4,7 @@
     "slug": "recipe-buddy-expo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "",
+    "icon": "./assets/icons/icon.png",
     "scheme": "recipebuddyexpo",
     "userInterfaceStyle": "automatic",
     "ios": {
@@ -17,7 +17,7 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "",
+        "foregroundImage": "./assets/icons/android-icon.png",
         "backgroundImage": "",
         "monochromeImage": ""
       },
@@ -33,7 +33,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "",
+          "image": "./assets/icons/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
