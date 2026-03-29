@@ -1,3 +1,4 @@
+// dependencies
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   View,
@@ -9,11 +10,13 @@ import {
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useTheme } from "../../../context/ThemeContext";
-import { Recipe, Ingredient } from "../../../types";
-import { fontSizes, fontWeights } from "../../../constants/theme";
+// context
+import { useTheme } from "@/context/ThemeContext";
+// constants
+import { fontWeights } from "@/constants/theme";
+// types
+import { Recipe, Ingredient } from "@/types";
 
-// ─── Mock Recipe ──────────────────────────────────────────────────────────────
 const MOCK_RECIPE: Recipe = {
   id: "pistachio",
   name: "Pistachio Bronte",

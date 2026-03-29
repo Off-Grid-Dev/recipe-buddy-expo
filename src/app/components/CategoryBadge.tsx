@@ -1,6 +1,9 @@
+// dependencies
 import { View, Text, StyleSheet } from "react-native";
-import type { Recipe } from "@/types";
+// context
 import { useTheme } from "@/context/ThemeContext";
+// types
+import type { Recipe } from "@/types";
 
 export default function CategoryBadge({
   category,

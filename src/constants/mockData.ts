@@ -1,6 +1,6 @@
+// types
 import { Recipe } from "../types";
 
-// ─── Mock Data ────────────────────────────────────────────────────────────────
 const MOCK_RECIPES: Recipe[] = [
   {
     id: "pistachio",

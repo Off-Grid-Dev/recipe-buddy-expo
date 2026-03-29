@@ -1,3 +1,4 @@
+// dependencies
 import React, { useState, useMemo } from "react";
 import {
   View,
@@ -9,15 +10,25 @@ import {
   Button,
 } from "react-native";
 import { Link } from "expo-router";
-import { useTheme } from "../context/ThemeContext";
+// context
+import { useTheme } from "@/context/ThemeContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import MOCK_RECIPES from "@/constants/mockData";
+// components
 import RecipeCard from "./components/RecipeCard";
+// constants
+import MOCK_RECIPES from "@/constants/mockData";
 
-// ─── Home Screen ──────────────────────────────────────────────────────────────
 export default function HomeScreen() {
-  const { colors, spacing, radii, textStyles, shadows, mode, setMode } =
-    useTheme();
+  const {
+    colors,
+    spacing,
+    radii,
+    textStyles,
+    fontSizes,
+    shadows,
+    mode,
+    setMode,
+  } = useTheme();
   const { top, right, bottom, left } = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
@@ -70,7 +81,15 @@ export default function HomeScreen() {
                   { color: colors.textSecondary, marginTop: spacing.xs },
                 ]}
               >
-                Sweet Madness by Geir Tengs
+                by{" "}
+                <Text
+                  style={{
+                    color: colors.accentPrimary,
+                    fontSize: fontSizes.sm,
+                  }}
+                >
+                  skinnyK
+                </Text>
               </Text>
             </View>
 
@@ -96,7 +115,7 @@ export default function HomeScreen() {
                   styles.searchInput,
                   { color: colors.textPrimary },
                 ]}
-                placeholder="Search flavors (e.g. Pistachio, Sorbet)…"
+                placeholder="Search flavors…"
                 placeholderTextColor={colors.textSecondary}
                 value={searchQuery}
                 onChangeText={setSearchQuery}

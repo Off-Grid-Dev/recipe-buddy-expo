@@ -1,3 +1,4 @@
+// dependencies
 import { Platform, Easing } from "react-native";
 
 // ─────────────────────────────────────────────────────────────────────────────

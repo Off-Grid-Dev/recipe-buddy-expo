@@ -1,3 +1,4 @@
+// dependencies
 import React, { useState, useCallback } from "react";
 import {
   View,
@@ -12,8 +13,10 @@ import {
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useTheme } from "../context/ThemeContext";
-import { Ingredient, IngredientGroup, RecipeCategory } from "../types";
+// context
+import { useTheme } from "@/context/ThemeContext";
+// types
+import { Ingredient, IngredientGroup, RecipeCategory } from "@/types";
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 

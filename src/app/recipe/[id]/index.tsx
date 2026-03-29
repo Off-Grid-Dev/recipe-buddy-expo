@@ -1,3 +1,4 @@
+// dependencies
 import React, { useState, useMemo } from "react";
 import {
   View,
@@ -8,12 +9,12 @@ import {
   Pressable,
 } from "react-native";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
-import { useTheme } from "../../../context/ThemeContext";
-import { Recipe, IngredientGroup } from "../../../types";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+// context
+import { useTheme } from "@/context/ThemeContext";
+// types
+import { Recipe, IngredientGroup } from "@/types";
 
-// ─── Mock Data Loader ─────────────────────────────────────────────────────────
-// In production, replace with your actual data fetching (SQLite, API, etc.)
 const MOCK_RECIPE: Recipe = {
   id: "pistachio",
   name: "Pistachio Bronte",
