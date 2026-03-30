@@ -9,72 +9,73 @@ import {
   Pressable,
 } from "react-native";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 // context
 import { useTheme } from "@/context/ThemeContext";
+// constants
+import MOCK_RECIPES from "@/constants/mockData";
 // types
 import { Recipe, IngredientGroup } from "@/types";
 
-const MOCK_RECIPE: Recipe = {
-  id: "pistachio",
-  name: "Pistachio Bronte",
-  category: "gelato",
-  description:
-    "Made with pure Bronte pistachio paste. Intense green color and deeply nutty finish.",
-  baseWeightGrams: 5000,
-  agingTimeHours: 12,
-  ingredients: [
-    {
-      id: "1",
-      name: "Whole Milk",
-      percentage: 56,
-      unit: "g",
-      group: "liquids",
-    },
-    { id: "2", name: "Cream 35%", percentage: 16, unit: "g", group: "liquids" },
-    { id: "3", name: "Sucrose", percentage: 14, unit: "g", group: "sugars" },
-    { id: "4", name: "Dextrose", percentage: 4, unit: "g", group: "sugars" },
-    {
-      id: "5",
-      name: "Stabilizer",
-      percentage: 0.5,
-      unit: "g",
-      group: "stabilizers",
-    },
-    {
-      id: "6",
-      name: "Pistachio Paste",
-      percentage: 9.5,
-      unit: "g",
-      group: "flavorings",
-    },
-  ],
-  steps: [
-    {
-      id: "s1",
-      type: "weighing",
-      instruction: "Weigh all ingredients accurately.",
-    },
-    {
-      id: "s2",
-      type: "pasteurization",
-      instruction: "Pasteurize mix at 85°C for 5 minutes.",
-      targetTemperature: 85,
-    },
-    {
-      id: "s3",
-      type: "aging",
-      instruction: "Cool rapidly and age for 12 hours at 4°C.",
-      targetTemperature: 4,
-      durationMinutes: 720,
-    },
-    {
-      id: "s4",
-      type: "churning",
-      instruction: "Churn in batch freezer until desired consistency.",
-    },
-  ],
-};
+// const MOCK_RECIPE: Recipe = {
+//   id: "pistachio",
+//   name: "Pistachio Bronte",
+//   category: "gelato",
+//   description:
+//     "Made with pure Bronte pistachio paste. Intense green color and deeply nutty finish.",
+//   baseWeightGrams: 5000,
+//   agingTimeHours: 12,
+//   ingredients: [
+//     {
+//       id: "1",
+//       name: "Whole Milk",
+//       percentage: 56,
+//       unit: "g",
+//       group: "liquids",
+//     },
+//     { id: "2", name: "Cream 35%", percentage: 16, unit: "g", group: "liquids" },
+//     { id: "3", name: "Sucrose", percentage: 14, unit: "g", group: "sugars" },
+//     { id: "4", name: "Dextrose", percentage: 4, unit: "g", group: "sugars" },
+//     {
+//       id: "5",
+//       name: "Stabilizer",
+//       percentage: 0.5,
+//       unit: "g",
+//       group: "stabilizers",
+//     },
+//     {
+//       id: "6",
+//       name: "Pistachio Paste",
+//       percentage: 9.5,
+//       unit: "g",
+//       group: "flavorings",
+//     },
+//   ],
+//   steps: [
+//     {
+//       id: "s1",
+//       type: "weighing",
+//       instruction: "Weigh all ingredients accurately.",
+//     },
+//     {
+//       id: "s2",
+//       type: "pasteurization",
+//       instruction: "Pasteurize mix at 85°C for 5 minutes.",
+//       targetTemperature: 85,
+//     },
+//     {
+//       id: "s3",
+//       type: "aging",
+//       instruction: "Cool rapidly and age for 12 hours at 4°C.",
+//       targetTemperature: 4,
+//       durationMinutes: 720,
+//     },
+//     {
+//       id: "s4",
+//       type: "churning",
+//       instruction: "Churn in batch freezer until desired consistency.",
+//     },
+//   ],
+// };
 
 const INGREDIENT_GROUP_ORDER: IngredientGroup[] = [
   "liquids",
@@ -89,10 +90,10 @@ export default function RecipeOverviewScreen() {
   const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { top, right, bottom, left } = useSafeAreaInsets();
 
   // In production: fetch recipe by id. Using mock for now.
-  const recipe = MOCK_RECIPE;
+  // const recipe = MOCK_RECIPE;
+  const recipe: Recipe = MOCK_RECIPES.filter((item) => item.id === id);
 
   const [batchSize, setBatchSize] = useState(String(recipe.baseWeightGrams));
   const batchSizeNum = useMemo(
