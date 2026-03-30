@@ -13,7 +13,7 @@ const MOCK_RECIPES: Recipe[] = [
     ingredients: [
       {
         id: "1",
-        name: "Whole Milk",
+        name: `Whole Milk`,
         percentage: 56,
         unit: "g",
         group: "liquids",

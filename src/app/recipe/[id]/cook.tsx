@@ -124,7 +124,7 @@ export default function CookScreen() {
               backgroundColor: colors.bgSecondary,
               borderRadius: radii.xl,
               borderColor: colors.borderDefault,
-              padding: spacing.xl,
+              paddingBlock: spacing.xl,
             },
           ]}
         >
@@ -144,7 +144,6 @@ export default function CookScreen() {
           </Text>
           <Text
             numberOfLines={1}
-            adjustsFontSizeToFit
             style={[
               textStyles.h2,
               {
