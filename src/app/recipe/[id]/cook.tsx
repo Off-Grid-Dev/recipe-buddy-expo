@@ -1,165 +1,35 @@
 // dependencies
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  Animated,
-  Alert,
-} from "react-native";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import React, { useState, useEffect, useCallback } from "react";
+import { View, Text, StyleSheet, Pressable, Alert, Button } from "react-native";
+import { useRouter, useLocalSearchParams, Link } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 // context
 import { useTheme } from "@/context/ThemeContext";
 // constants
 import { fontWeights } from "@/constants/theme";
+import MOCK_RECIPES from "@/constants/mockData";
 // types
 import { Recipe, Ingredient } from "@/types";
 
-const MOCK_RECIPE: Recipe = {
-  id: "pistachio",
-  name: "Pistachio Bronte",
-  category: "gelato",
-  description: "Made with pure Bronte pistachio paste.",
-  baseWeightGrams: 5000,
-  agingTimeHours: 12,
-  ingredients: [
-    {
-      id: "1",
-      name: "Whole Milk",
-      percentage: 56,
-      unit: "g",
-      group: "liquids",
-    },
-    { id: "2", name: "Cream 35%", percentage: 16, unit: "g", group: "liquids" },
-    { id: "3", name: "Sucrose", percentage: 14, unit: "g", group: "sugars" },
-    { id: "4", name: "Dextrose", percentage: 4, unit: "g", group: "sugars" },
-    {
-      id: "5",
-      name: "Stabilizer",
-      percentage: 0.5,
-      unit: "g",
-      group: "stabilizers",
-    },
-    {
-      id: "6",
-      name: "Pistachio Paste",
-      percentage: 9.5,
-      unit: "g",
-      group: "flavorings",
-    },
-  ],
-  steps: [],
-};
-
-const TOLERANCE_GRAMS = 2.0;
-
-type StatusType = "add" | "perfect" | "remove";
-
 // ─── Cook Screen ──────────────────────────────────────────────────────────────
 export default function CookScreen() {
-  const { colors, spacing, radii, textStyles, fontSizes } = useTheme();
+  const { colors, spacing, radii, textStyles, fontSizes, mode, setMode } =
+    useTheme();
   const { top, right, bottom, left } = useSafeAreaInsets();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  const recipe = MOCK_RECIPE;
+  const recipe: Recipe = MOCK_RECIPES.find((item) => item.id === String(id))!;
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [scaleWeight, setScaleWeight] = useState(0);
-  const [isTared, setIsTared] = useState(false);
-  const [isAdjusting, setIsAdjusting] = useState(false);
 
   const currentIngredient: Ingredient = recipe.ingredients[currentStepIndex];
   const targetWeight =
     recipe.baseWeightGrams * (currentIngredient.percentage / 100);
 
-  // ── Simulated scale noise ─────────────────────────────────────────────────
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      if (!isTared) {
-        const noise = Math.random() * 1.5 - 0.75;
-        setScaleWeight((w) => Math.max(0, w + noise));
-      }
-    }, 200);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isTared]);
-
-  // ── Animated progress bar ─────────────────────────────────────────────────
-  const progressAnim = useRef(new Animated.Value(0)).current;
-  const progressPercent = Math.min(100, (scaleWeight / targetWeight) * 100);
-
-  useEffect(() => {
-    Animated.timing(progressAnim, {
-      toValue: progressPercent,
-      duration: 180,
-      useNativeDriver: false,
-    }).start();
-  }, [progressPercent, progressAnim]);
-
-  // ── Pulse animation for overweight alert ──────────────────────────────────
-  const pulseAnim = useRef(new Animated.Value(0)).current;
-  useEffect(() => {
-    if (scaleWeight > targetWeight + 5 && !isAdjusting) {
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(pulseAnim, {
-            toValue: 1,
-            duration: 800,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pulseAnim, {
-            toValue: 0,
-            duration: 800,
-            useNativeDriver: true,
-          }),
-        ]),
-      ).start();
-    } else {
-      pulseAnim.stopAnimation();
-      pulseAnim.setValue(0);
-    }
-  }, [scaleWeight > targetWeight + 5, isAdjusting]);
-
-  // ── Status logic ──────────────────────────────────────────────────────────
-  const diff = scaleWeight - targetWeight;
-  const isComplete = Math.abs(diff) <= TOLERANCE_GRAMS;
-
-  const status: StatusType = isComplete
-    ? "perfect"
-    : diff < 0
-      ? "add"
-      : "remove";
-
-  const statusConfig: Record<StatusType, { text: string; color: string }> = {
-    perfect: { text: "Perfect Weight ✓", color: colors.success },
-    add: { text: "Add More", color: colors.textPrimary },
-    remove: { text: "Remove Excess", color: colors.error },
-  };
-
-  const progressColor: Record<StatusType, string> = {
-    perfect: colors.success,
-    add: colors.accentPrimary,
-    remove: colors.error,
-  };
-
-  // ── Handlers ──────────────────────────────────────────────────────────────
-  const handleTare = useCallback(() => {
-    setScaleWeight(0);
-    setIsTared(true);
-  }, []);
-
   const advanceStep = useCallback(() => {
     if (currentStepIndex < recipe.ingredients.length - 1) {
       setCurrentStepIndex((i) => i + 1);
-      setScaleWeight(0);
-      setIsTared(false);
-      setIsAdjusting(false);
     } else {
       // Last ingredient — batch complete
       Alert.alert(
@@ -168,29 +38,16 @@ export default function CookScreen() {
         [{ text: "Done", onPress: () => router.push(`/recipe/${id}`) }],
       );
     }
-  }, [currentStepIndex, recipe.ingredients.length]);
+  }, [currentStepIndex, recipe.ingredients.length, id, recipe.name, router]);
 
   const retreatStep = useCallback(() => {
     if (currentStepIndex > 0) {
       setCurrentStepIndex((i) => i - 1);
-      setScaleWeight(0);
-      setIsTared(false);
-      setIsAdjusting(false);
     }
   }, [currentStepIndex]);
 
-  const handleAbort = () => {
-    Alert.alert("Abort Batch?", "Your progress will be lost.", [
-      { text: "Keep Going", style: "cancel" },
-      {
-        text: "Abort",
-        style: "destructive",
-        onPress: () => router.push(`/recipe/${id}`),
-      },
-    ]);
-  };
+  const isLastIngredient = currentStepIndex === recipe.ingredients.length - 1;
 
-  // ── Render ────────────────────────────────────────────────────────────────
   return (
     <View
       style={{
@@ -201,6 +58,10 @@ export default function CookScreen() {
         paddingLeft: left,
       }}
     >
+      <Button
+        title="toggle theme"
+        onPress={() => setMode(mode === "dark" ? "light" : "dark")}
+      />
       {/* ── Cook Header ── */}
       <View
         style={[
@@ -208,18 +69,26 @@ export default function CookScreen() {
           { paddingHorizontal: spacing.md, paddingTop: spacing.md },
         ]}
       >
-        <Pressable onPress={handleAbort} style={styles.abortBtn}>
-          {({ pressed }) => (
-            <Text
-              style={[
-                textStyles.bodySmall,
-                { color: pressed ? colors.error : colors.textSecondary },
-              ]}
-            >
-              Abort Batch
-            </Text>
-          )}
-        </Pressable>
+        {/* ── Back link ── */}
+        <Link href="/" asChild>
+          <Pressable
+            style={StyleSheet.flatten([
+              styles.backLink,
+              { marginTop: spacing.lg },
+            ])}
+          >
+            {({ pressed }) => (
+              <Text
+                style={[
+                  textStyles.bodySmall,
+                  { color: pressed ? colors.textAccent : colors.textSecondary },
+                ]}
+              >
+                ← Back to Library
+              </Text>
+            )}
+          </Pressable>
+        </Link>
 
         <View style={styles.headerCenter}>
           <Text
@@ -318,92 +187,44 @@ export default function CookScreen() {
         <View
           style={[styles.controls, { marginTop: spacing.md, gap: spacing.sm }]}
         >
-          {isComplete ? (
-            <Pressable
-              onPress={advanceStep}
-              style={({ pressed }) => [
-                styles.controlBtn,
-                {
-                  backgroundColor: pressed
-                    ? colors.accentPressed
-                    : colors.accentPrimary,
-                  borderRadius: radii.md,
-                  paddingVertical: spacing.md + 2,
-                  shadowColor: colors.accentPrimary,
-                  shadowOffset: { width: 0, height: 0 },
-                  shadowOpacity: 0.4,
-                  shadowRadius: 12,
-                  elevation: 8,
-                },
-              ]}
-            >
-              <Text style={[textStyles.button, { color: colors.bgPrimary }]}>
-                {currentStepIndex === recipe.ingredients.length - 1
-                  ? "Finish Batch 🎉"
-                  : "Next Ingredient →"}
-              </Text>
-            </Pressable>
-          ) : (
-            // Placeholder to maintain layout when neither button is shown
-            <View style={styles.controlBtn} />
-          )}
-        </View>
-
-        {/* ── Overweight Alert ── */}
-        {scaleWeight > targetWeight + 5 && !isAdjusting && (
-          <Animated.View
-            style={[
-              styles.overweightAlert,
+          <Pressable
+            onPress={advanceStep}
+            disabled={!isLastIngredient}
+            style={({ pressed }) => [
+              styles.controlBtn,
               {
-                backgroundColor: colors.error + "18",
-                borderColor: colors.error,
+                backgroundColor: pressed
+                  ? colors.accentPressed
+                  : colors.accentPrimary,
+                opacity: isLastIngredient ? 1 : 0,
+                userSelect: isLastIngredient ? "auto" : "none",
                 borderRadius: radii.md,
-                padding: spacing.md,
-                marginTop: spacing.md,
-                opacity: pulseAnim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.7, 1],
-                }),
+                paddingVertical: spacing.md + 2,
+                shadowColor: colors.accentPrimary,
+                shadowOffset: { width: 0, height: 0 },
+                shadowOpacity: 0.4,
+                shadowRadius: 12,
+                elevation: 8,
+                transitionDuration: 900,
+                transitionTimingFunction: "ease-in-out",
+                transitionProperty: "opacity",
               },
             ]}
           >
-            <Text
-              style={[
-                textStyles.body,
-                {
-                  color: colors.error,
-                  fontWeight: fontWeights.bold,
-                  marginBottom: spacing.xxs,
-                },
-              ]}
-            >
-              ⚠️ Overweight
-            </Text>
-            <Text
-              style={[
-                textStyles.bodySmall,
-                { color: colors.textSecondary, marginBottom: spacing.sm },
-              ]}
-            >
-              Exceeds tolerance by {(scaleWeight - targetWeight).toFixed(1)}g
-            </Text>
-            <Pressable onPress={() => setIsAdjusting(true)}>
-              {({ pressed }) => (
-                <Text
-                  style={[
-                    textStyles.bodySmall,
-                    {
-                      color: pressed ? colors.error + "aa" : colors.error,
-                      textDecorationLine: "underline",
-                    },
-                  ]}
-                >
-                  Recalculate remaining ingredients
-                </Text>
-              )}
-            </Pressable>
-          </Animated.View>
-        )}
+            <Link href={`/recipe/${id}`}>
+              <Text
+                style={[
+                  textStyles.button,
+                  {
+                    color: colors.bgPrimary,
+                  },
+                ]}
+              >
+                {isLastIngredient ? "Finish Batch 🎉" : "Not finished"}
+              </Text>
+            </Link>
+          </Pressable>
+        </View>
       </View>
 
       {/* ── Bottom Nav ── */}
@@ -451,7 +272,6 @@ export default function CookScreen() {
             />
           ))}
         </View>
-
         <Pressable
           onPress={advanceStep}
           disabled={currentStepIndex === recipe.ingredients.length - 1}
@@ -499,6 +319,7 @@ const styles = StyleSheet.create({
   controlBtn: { flex: 1, alignItems: "center" },
   controlBtnWide: { flex: 2 },
   overweightAlert: { borderWidth: 1 },
+  backLink: { alignSelf: "flex-start", paddingVertical: 8, marginBottom: 8 },
   bottomNav: {
     flexDirection: "row",
     justifyContent: "space-between",

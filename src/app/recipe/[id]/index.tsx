@@ -7,6 +7,7 @@ import {
   ScrollView,
   TextInput,
   Pressable,
+  Button,
 } from "react-native";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
 // context
@@ -15,6 +16,7 @@ import { useTheme } from "@/context/ThemeContext";
 import MOCK_RECIPES from "@/constants/mockData";
 // types
 import { Recipe, IngredientGroup } from "@/types";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // const MOCK_RECIPE: Recipe = {
 //   id: "pistachio",
@@ -87,18 +89,18 @@ const INGREDIENT_GROUP_ORDER: IngredientGroup[] = [
 
 // ─── Overview Screen ──────────────────────────────────────────────────────────
 export default function RecipeOverviewScreen() {
-  const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
+  const { colors, spacing, radii, textStyles, shadows, mode, setMode } =
+    useTheme();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { top } = useSafeAreaInsets();
 
-  // In production: fetch recipe by id. Using mock for now.
-  // const recipe = MOCK_RECIPE;
-  const recipe: Recipe = MOCK_RECIPES.filter((item) => item.id === id);
+  const recipe: Recipe = MOCK_RECIPES.find((item) => item.id === String(id))!;
 
   const [batchSize, setBatchSize] = useState(String(recipe.baseWeightGrams));
   const batchSizeNum = useMemo(
     () => parseFloat(batchSize) || recipe.baseWeightGrams,
-    [batchSize],
+    [batchSize, recipe.baseWeightGrams],
   );
 
   const getAdjustedWeight = (percentage: number) =>
@@ -122,6 +124,10 @@ export default function RecipeOverviewScreen() {
         ]}
         showsVerticalScrollIndicator={false}
       >
+        <Button
+          title="toggle theme"
+          onPress={() => setMode(mode === "dark" ? "light" : "dark")}
+        />
         {/* ── Back link ── */}
         <Link href="/" asChild>
           <Pressable
