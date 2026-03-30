@@ -27,7 +27,7 @@ const MOCK_RECIPE: Recipe = {
   ingredients: [
     {
       id: "1",
-      name: `Whole Milk`,
+      name: "Whole Milk",
       percentage: 56,
       unit: "g",
       group: "liquids",
@@ -274,6 +274,8 @@ export default function CookScreen() {
             {currentIngredient.group}
           </Text>
           <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
             style={[
               textStyles.h2,
               {

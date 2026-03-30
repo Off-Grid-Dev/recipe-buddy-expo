@@ -14,7 +14,7 @@ import { Link } from "expo-router";
 import { useTheme } from "@/context/ThemeContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 // components
-import RecipeCard from "./components/RecipeCard";
+import RecipeCard from "@/components/RecipeCard";
 // constants
 import MOCK_RECIPES from "@/constants/mockData";
 
