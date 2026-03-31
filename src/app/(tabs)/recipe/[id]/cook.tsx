@@ -1,10 +1,12 @@
 // dependencies
-import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, Pressable, Alert, Button } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 // context
 import { useTheme } from "@/context/ThemeContext";
+// components
+import ToggleThemeButton from "@/components/buttons/ToggleTheme";
 // constants
 import { fontWeights } from "@/constants/theme";
 import MOCK_RECIPES from "@/constants/mockData";
@@ -13,8 +15,7 @@ import { Recipe, Ingredient } from "@/types";
 
 // ─── Cook Screen ──────────────────────────────────────────────────────────────
 export default function CookScreen() {
-  const { colors, spacing, radii, textStyles, fontSizes, mode, setMode } =
-    useTheme();
+  const { colors, spacing, radii, textStyles, fontSizes } = useTheme();
   const { top, right, bottom, left } = useSafeAreaInsets();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -58,10 +59,7 @@ export default function CookScreen() {
         paddingLeft: left,
       }}
     >
-      <Button
-        title="toggle theme"
-        onPress={() => setMode(mode === "dark" ? "light" : "dark")}
-      />
+      <ToggleThemeButton />
       {/* ── Cook Header ── */}
       <View
         style={[

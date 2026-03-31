@@ -6,15 +6,14 @@ import {
   StyleSheet,
   FlatList,
   TextInput,
-  Pressable,
   Button,
 } from "react-native";
-import { Link } from "expo-router";
 // context
 import { useTheme } from "@/context/ThemeContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 // components
 import RecipeCard from "@/components/RecipeCard";
+import ToggleThemeButton from "@/components/buttons/ToggleTheme";
 // constants
 import MOCK_RECIPES from "@/constants/mockData";
 
@@ -50,12 +49,10 @@ export default function HomeScreen() {
         paddingRight: right,
         paddingBottom: bottom,
         paddingLeft: left,
+        backgroundColor: colors.bgPrimary,
       }}
     >
-      <Button
-        title="toggle theme"
-        onPress={() => setMode(mode === "dark" ? "light" : "dark")}
-      />
+      <ToggleThemeButton />
 
       <FlatList
         data={filteredRecipes}
@@ -158,45 +155,7 @@ export default function HomeScreen() {
             </Text>
           </View>
         }
-        // Bottom padding so FAB doesn't cover last card
-        ListFooterComponent={
-          <View style={{ height: spacing.xxxl + spacing.xl }} />
-        }
       />
-
-      {/* ── Floating Action Button ── */}
-      <Link href="/new-recipe" asChild>
-        <Pressable
-          style={({ pressed }) => [
-            styles.fab,
-            {
-              backgroundColor: colors.accentPrimary,
-              borderRadius: radii.full,
-              bottom: spacing.xl,
-              right: spacing.lg,
-              shadowColor: colors.accentPrimary,
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.5,
-              shadowRadius: 16,
-              elevation: 12,
-            },
-            pressed && {
-              transform: [{ scale: 0.94 }],
-              backgroundColor: colors.accentPressed,
-            },
-          ]}
-        >
-          <Text
-            style={[
-              textStyles.button,
-              styles.fabText,
-              { color: colors.bgPrimary },
-            ]}
-          >
-            + New Recipe
-          </Text>
-        </Pressable>
-      </Link>
     </View>
   );
 }
@@ -207,9 +166,6 @@ const styles = StyleSheet.create({
   header: { alignItems: "center", marginBottom: 4 },
   logoRow: { flexDirection: "row", alignItems: "center", gap: 10 },
   logoEmoji: { fontSize: 28 },
-  themeToggle: {
-    marginInline: "auto",
-  },
   searchWrapper: {
     flexDirection: "row",
     alignItems: "center",
@@ -220,12 +176,4 @@ const styles = StyleSheet.create({
   searchIcon: { fontSize: 16, marginRight: 10 },
   searchInput: { flex: 1, padding: 0 },
   emptyState: { alignItems: "center", paddingVertical: 60 },
-  fab: {
-    position: "absolute",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-  },
-  fabText: { marginLeft: 0 },
 });
