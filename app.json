@@ -22,11 +22,11 @@
         "monochromeImage": ""
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.recipebuddyexpo"
+      "package": "com.skinnyK.recipebuddyexpo"
     },
     "web": {
       "output": "static",
-      "favicon": ""
+      "favicon": "./assets/icons/icon.png"
     },
     "plugins": [
       "expo-router",

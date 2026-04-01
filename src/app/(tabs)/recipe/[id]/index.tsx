@@ -343,6 +343,7 @@ export default function RecipeOverviewScreen() {
               borderRadius: radii.md,
               padding: spacing.md,
               marginTop: spacing.lg,
+              marginBottom: 3 * spacing.xxxl,
             },
           ]}
         >
@@ -366,9 +367,6 @@ export default function RecipeOverviewScreen() {
             </Text>
           </View>
         </View>
-
-        {/* Bottom padding for fixed footer */}
-        <View style={{ height: 120 }} />
       </ScrollView>
 
       {/* ── Fixed Footer CTA ── */}
@@ -376,8 +374,8 @@ export default function RecipeOverviewScreen() {
         style={[
           styles.footer,
           {
-            backgroundColor: colors.bgPrimary,
-            borderTopColor: colors.borderSubtle,
+            backgroundColor: "transparent",
+            borderColor: "transparent",
             paddingBottom: spacing.lg,
             paddingHorizontal: spacing.md,
             paddingTop: spacing.md,
@@ -399,6 +397,7 @@ export default function RecipeOverviewScreen() {
               shadowOpacity: 0.4,
               shadowRadius: 16,
               elevation: 10,
+              marginBottom: spacing.xxxl,
             },
             pressed && { transform: [{ scale: 0.98 }] },
           ]}
