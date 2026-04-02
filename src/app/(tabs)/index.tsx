@@ -1,21 +1,14 @@
 // dependencies
 import React, { useState, useMemo } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TextInput,
-  Button,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@context/ThemeContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 // components
-import RecipeCard from "@/components/RecipeCard";
-import ToggleThemeButton from "@/components/buttons/ToggleTheme";
+import RecipeCard from "@components/RecipeCard";
+import ToggleThemeButton from "@components/buttons/ToggleTheme";
 // constants
-import MOCK_RECIPES from "@/constants/mockData";
+import MOCK_RECIPES from "@constants/mockData";
 
 export default function HomeScreen() {
   const {

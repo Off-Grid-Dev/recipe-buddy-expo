@@ -1,7 +1,7 @@
 // dependencies
 import { Stack } from "expo-router";
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@context/ThemeContext";
 
 export default function RecipeLayout() {
   const { colors } = useTheme();

@@ -1,9 +1,9 @@
 // dependencies
 import { View, Text } from "react-native";
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@context/ThemeContext";
 // components
-import ToggleThemeButton from "@/components/buttons/ToggleTheme";
+import ToggleThemeButton from "@components/buttons/ToggleTheme";
 
 // ─── Overview Screen ──────────────────────────────────────────────────────────
 export default function RecipeOverviewScreen() {

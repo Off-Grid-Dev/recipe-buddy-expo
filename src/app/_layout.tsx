@@ -9,7 +9,7 @@ import {
   initialWindowMetrics,
 } from "react-native-safe-area-context";
 // context
-import { ThemeProvider, useTheme } from "@/context/ThemeContext";
+import { ThemeProvider, useTheme } from "@context/ThemeContext";
 
 SplashScreen.preventAutoHideAsync();
 

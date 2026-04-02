@@ -1,7 +1,7 @@
 // dependencies
 import { View, Text, StyleSheet } from "react-native";
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@context/ThemeContext";
 // types
 import type { Recipe } from "@/types";
 

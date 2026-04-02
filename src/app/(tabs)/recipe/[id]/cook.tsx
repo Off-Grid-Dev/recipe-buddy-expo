@@ -4,12 +4,12 @@ import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@context/ThemeContext";
 // components
-import ToggleThemeButton from "@/components/buttons/ToggleTheme";
+import ToggleThemeButton from "@components/buttons/ToggleTheme";
 // constants
-import { fontWeights } from "@/constants/theme";
-import MOCK_RECIPES from "@/constants/mockData";
+import { fontWeights } from "@constants/theme";
+import MOCK_RECIPES from "@constants/mockData";
 // types
 import { Recipe, Ingredient } from "@/types";
 

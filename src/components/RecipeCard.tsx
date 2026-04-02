@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Pressable, View, Text, StyleSheet, Image } from "react-native";
 import { useRouter } from "expo-router";
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@context/ThemeContext";
 // components
 import CategoryBadge from "./CategoryBadge";
 // types

@@ -1,7 +1,7 @@
 // dependencies
 import { TouchableOpacity, Text } from "react-native";
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@context/ThemeContext";
 
 export default function ToggleThemeButton() {
   const { spacing, radii, setMode, mode, colors } = useTheme();

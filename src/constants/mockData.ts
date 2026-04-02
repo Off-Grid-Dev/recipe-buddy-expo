@@ -1,5 +1,5 @@
 // types
-import { Recipe } from "../types";
+import { Recipe } from "@/types";
 
 const MOCK_RECIPES: Recipe[] = [
   {

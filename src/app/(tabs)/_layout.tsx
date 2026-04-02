@@ -2,7 +2,7 @@
 import { Tabs } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 // constants
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@context/ThemeContext";
 
 export default function TabsLayoutNav() {
   const { colors } = useTheme();
