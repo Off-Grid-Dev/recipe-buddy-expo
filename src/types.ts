@@ -1,20 +1,20 @@
 export type IngredientGroup =
-  | 'liquids'
-  | 'sugars'
-  | 'solids'
-  | 'stabilizers'
-  | 'flavorings';
+  | "liquids"
+  | "sugars"
+  | "solids"
+  | "stabilizers"
+  | "flavorings";
 
-export type Unit = 'g' | 'kg' | 'ml' | 'l';
+export type Unit = "g" | "kg" | "ml" | "l";
 
-export type RecipeCategory = 'gelato' | 'sorbetto' | 'crema';
+export type RecipeCategory = "gelato" | "sorbetto" | "crema";
 
 export type StepType =
-  | 'weighing'
-  | 'pasteurization'
-  | 'aging'
-  | 'churning'
-  | 'hardening';
+  | "weighing"
+  | "pasteurization"
+  | "aging"
+  | "churning"
+  | "hardening";
 
 export interface Ingredient {
   id: string;
