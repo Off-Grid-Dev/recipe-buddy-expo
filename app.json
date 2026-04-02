@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "recipe-buddy-expo",
+    "name": "Recipe Buddy",
     "slug": "recipe-buddy-expo",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.recipebuddyexpo",
+      "bundleIdentifier": "com.skinnyK.recipebuddyexpo",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -36,9 +36,9 @@
           "image": "./assets/icons/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#cbd5e1",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#0f1115"
           }
         }
       ],
