@@ -1,5 +1,5 @@
 // dependencies
-import { TouchableOpacity, Text } from "react-native";
+import { Text, Pressable, StyleSheet } from "react-native";
 // context
 import { useTheme } from "@context/ThemeContext";
 
@@ -7,16 +7,21 @@ export default function ToggleThemeButton() {
   const { spacing, radii, setMode, mode, colors } = useTheme();
 
   return (
-    <TouchableOpacity
-      style={{
-        backgroundColor: colors.bgTertiary,
-        padding: spacing.md,
-        aspectRatio: 1,
-        borderRadius: radii.full,
-        alignSelf: "flex-end",
-        justifyContent: "center",
-        margin: spacing.sm,
-      }}
+    <Pressable
+      style={({ pressed }) => [
+        {
+          backgroundColor: colors.bgTertiary,
+          padding: spacing.md,
+          aspectRatio: 1,
+          borderRadius: radii.full,
+          alignSelf: "flex-end",
+          justifyContent: "center",
+          margin: spacing.sm,
+        },
+        pressed && {
+          backgroundColor: colors.bgTertiaryLow,
+        },
+      ]}
       onPress={() => setMode(mode === "dark" ? "light" : "dark")}
     >
       <Text
@@ -27,6 +32,8 @@ export default function ToggleThemeButton() {
       >
         Toggle theme
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 }
+
+const styles = StyleSheet.create({});

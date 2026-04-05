@@ -11,16 +11,8 @@ import ToggleThemeButton from "@components/buttons/ToggleTheme";
 import MOCK_RECIPES from "@constants/mockData";
 
 export default function HomeScreen() {
-  const {
-    colors,
-    spacing,
-    radii,
-    textStyles,
-    fontSizes,
-    shadows,
-    mode,
-    setMode,
-  } = useTheme();
+  const { colors, spacing, radii, textStyles, fontSizes, shadows, mode } =
+    useTheme();
   const { top, right, bottom, left } = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
