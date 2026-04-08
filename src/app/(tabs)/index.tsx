@@ -1,20 +1,20 @@
 // dependencies
-import React, { useState, useMemo } from "react";
-import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
+import React, { useState, useMemo } from 'react';
+import { View, Text, StyleSheet, FlatList, TextInput } from 'react-native';
 // context
-import { useTheme } from "@context/ThemeContext";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTheme } from '@context/ThemeContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // components
-import RecipeCard from "@components/RecipeCard";
-import ToggleThemeButton from "@components/buttons/ToggleTheme";
+import RecipeCard from '@components/RecipeCard';
+import ToggleThemeButton from '@components/buttons/ToggleTheme';
 // constants
-import MOCK_RECIPES from "@constants/mockData";
+import MOCK_RECIPES from '@constants/mockData';
 
 export default function HomeScreen() {
   const { colors, spacing, radii, textStyles, fontSizes, shadows, mode } =
     useTheme();
   const { top, right, bottom, left } = useSafeAreaInsets();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
 
   const filteredRecipes = useMemo(() => {
@@ -63,7 +63,7 @@ export default function HomeScreen() {
                   { color: colors.textSecondary, marginTop: spacing.xs },
                 ]}
               >
-                by{" "}
+                by{' '}
                 <Text
                   style={{
                     color: colors.accentPrimary,
@@ -86,7 +86,7 @@ export default function HomeScreen() {
                     ? colors.borderAccent
                     : colors.borderSubtle,
                   marginVertical: spacing.lg,
-                  ...(mode === "dark" ? shadows.sm : shadows.cardLight),
+                  ...(mode === 'dark' ? shadows.sm : shadows.cardLight),
                 },
               ]}
             >
@@ -97,14 +97,14 @@ export default function HomeScreen() {
                   styles.searchInput,
                   { color: colors.textPrimary },
                 ]}
-                placeholder="Search flavors…"
+                placeholder='Search flavors…'
                 placeholderTextColor={colors.textSecondary}
                 value={searchQuery}
                 onChangeText={setSearchQuery}
                 onFocus={() => setSearchFocused(true)}
                 onBlur={() => setSearchFocused(false)}
-                returnKeyType="search"
-                clearButtonMode="while-editing"
+                returnKeyType='search'
+                clearButtonMode='while-editing'
               />
             </View>
 
@@ -115,8 +115,8 @@ export default function HomeScreen() {
                 { color: colors.textSecondary, marginBottom: spacing.md },
               ]}
             >
-              {filteredRecipes.length}{" "}
-              {filteredRecipes.length === 1 ? "Recipe" : "Recipes"}
+              {filteredRecipes.length}{' '}
+              {filteredRecipes.length === 1 ? 'Recipe' : 'Recipes'}
             </Text>
           </>
         }
@@ -148,17 +148,17 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   listContent: { flexGrow: 1 },
-  header: { alignItems: "center", marginBottom: 4 },
-  logoRow: { flexDirection: "row", alignItems: "center", gap: 10 },
+  header: { alignItems: 'center', marginBottom: 4 },
+  logoRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   logoEmoji: { fontSize: 28 },
   searchWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderWidth: 1,
   },
   searchIcon: { fontSize: 16, marginRight: 10 },
   searchInput: { flex: 1, padding: 0 },
-  emptyState: { alignItems: "center", paddingVertical: 60 },
+  emptyState: { alignItems: 'center', paddingVertical: 60 },
 });

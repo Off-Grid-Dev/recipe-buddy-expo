@@ -7,7 +7,9 @@
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
     "web": "npx expo start --web",
-    "lint": "npx expo lint"
+    "format": "npx prettier --write .",
+    "lint": "npx expo lint",
+    "lint:fix": "npm run format && npx expo lint --fix"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",

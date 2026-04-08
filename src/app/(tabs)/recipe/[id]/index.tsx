@@ -29,8 +29,7 @@ const INGREDIENT_GROUP_ORDER: IngredientGroup[] = [
 
 // ─── Overview Screen ──────────────────────────────────────────────────────────
 export default function RecipeOverviewScreen() {
-  const { colors, spacing, radii, textStyles, shadows, mode, setMode } =
-    useTheme();
+  const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { top } = useSafeAreaInsets();

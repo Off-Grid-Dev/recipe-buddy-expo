@@ -1,8 +1,8 @@
 // dependencies
-import { Tabs } from "expo-router";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Tabs } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 // constants
-import { useTheme } from "@context/ThemeContext";
+import { useTheme } from '@context/ThemeContext';
 
 export default function TabsLayoutNav() {
   const { colors } = useTheme();
@@ -18,40 +18,40 @@ export default function TabsLayoutNav() {
         }}
       >
         <Tabs.Screen
-          name="index"
+          name='index'
           options={{
-            title: "Home",
+            title: 'Home',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 size={size}
-                name="home-outline"
+                name='home-outline'
                 color={color}
               />
             ),
           }}
         />
         <Tabs.Screen
-          name="profile"
+          name='profile'
           options={{
-            title: "Profile",
+            title: 'Profile',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 size={size}
-                name="account-cog-outline"
+                name='account-cog-outline'
                 color={color}
               />
             ),
           }}
         />
         <Tabs.Screen
-          name="recipe/[id]"
+          name='recipe/[id]'
           options={{
             href: null,
-            title: "Recipes",
+            title: 'Recipes',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 size={size}
-                name="account-cog-outline"
+                name='account-cog-outline'
                 color={color}
               />
             ),

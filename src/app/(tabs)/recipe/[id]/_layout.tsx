@@ -1,11 +1,11 @@
 // dependencies
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
 // import {
 //   initialWindowMetrics,
 //   SafeAreaProvider,
 // } from "react-native-safe-area-context";
 // context
-import { useTheme } from "@context/ThemeContext";
+import { useTheme } from '@context/ThemeContext';
 
 export default function RecipeLayout() {
   const { colors } = useTheme();
@@ -18,11 +18,11 @@ export default function RecipeLayout() {
         contentStyle: { backgroundColor: colors.bgPrimary },
       }}
     >
-      <Stack.Screen name="index" />
+      <Stack.Screen name='index' />
       <Stack.Screen
-        name="cook"
+        name='cook'
         options={{
-          animation: "slide_from_bottom",
+          animation: 'slide_from_bottom',
           gestureEnabled: false,
         }}
       />

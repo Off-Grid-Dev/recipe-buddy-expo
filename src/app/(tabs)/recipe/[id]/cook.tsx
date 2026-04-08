@@ -1,17 +1,17 @@
 // dependencies
-import React, { useState, useCallback } from "react";
-import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
-import { useRouter, useLocalSearchParams, Link } from "expo-router";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import React, { useState, useCallback } from 'react';
+import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
+import { useRouter, useLocalSearchParams, Link } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // context
-import { useTheme } from "@context/ThemeContext";
+import { useTheme } from '@context/ThemeContext';
 // components
-import ToggleThemeButton from "@components/buttons/ToggleTheme";
+import ToggleThemeButton from '@components/buttons/ToggleTheme';
 // constants
-import { fontWeights } from "@constants/theme";
-import MOCK_RECIPES from "@constants/mockData";
+import { fontWeights } from '@constants/theme';
+import MOCK_RECIPES from '@constants/mockData';
 // types
-import { Recipe, Ingredient } from "@/types";
+import { Recipe, Ingredient } from '@/types';
 
 // ─── Cook Screen ──────────────────────────────────────────────────────────────
 export default function CookScreen() {
@@ -34,9 +34,9 @@ export default function CookScreen() {
     } else {
       // Last ingredient — batch complete
       Alert.alert(
-        "Batch Complete! 🎉",
+        'Batch Complete! 🎉',
         `${recipe.name} is ready for processing.`,
-        [{ text: "Done", onPress: () => router.push(`/recipe/${id}`) }],
+        [{ text: 'Done', onPress: () => router.push(`/recipe/${id}`) }],
       );
     }
   }, [currentStepIndex, recipe.ingredients.length, id, recipe.name, router]);
@@ -68,7 +68,10 @@ export default function CookScreen() {
         ]}
       >
         {/* ── Back link ── */}
-        <Link href="/" asChild>
+        <Link
+          href='/'
+          asChild
+        >
           <Pressable
             style={StyleSheet.flatten([
               styles.backLink,
@@ -92,7 +95,7 @@ export default function CookScreen() {
           <Text
             style={[
               textStyles.bodySmall,
-              { color: colors.textSecondary, textAlign: "right" },
+              { color: colors.textSecondary, textAlign: 'right' },
             ]}
             numberOfLines={1}
           >
@@ -103,7 +106,7 @@ export default function CookScreen() {
               textStyles.label,
               {
                 color: colors.textAccent,
-                textAlign: "right",
+                textAlign: 'right',
                 fontSize: fontSizes.xxs,
               },
             ]}
@@ -133,7 +136,7 @@ export default function CookScreen() {
               {
                 color: colors.textSecondary,
                 fontSize: fontSizes.xxs,
-                textAlign: "center",
+                textAlign: 'center',
                 marginBottom: spacing.xs,
               },
             ]}
@@ -146,7 +149,7 @@ export default function CookScreen() {
               textStyles.h2,
               {
                 color: colors.textPrimary,
-                textAlign: "center",
+                textAlign: 'center',
                 marginBottom: spacing.lg,
               },
             ]}
@@ -160,12 +163,12 @@ export default function CookScreen() {
               textStyles.body,
               {
                 color: colors.textSecondary,
-                textAlign: "center",
+                textAlign: 'center',
                 marginBottom: spacing.sm,
               },
             ]}
           >
-            Target:{" "}
+            Target:{' '}
             <Text
               style={{
                 color: colors.textPrimary,
@@ -175,7 +178,7 @@ export default function CookScreen() {
               {targetWeight.toFixed(1)}g
             </Text>
             <Text style={{ color: colors.textAccent }}>
-              {"  "}({currentIngredient.percentage}%)
+              {'  '}({currentIngredient.percentage}%)
             </Text>
           </Text>
         </View>
@@ -194,7 +197,7 @@ export default function CookScreen() {
                   ? colors.accentPressed
                   : colors.accentPrimary,
                 opacity: isLastIngredient ? 1 : 0,
-                userSelect: isLastIngredient ? "auto" : "none",
+                userSelect: isLastIngredient ? 'auto' : 'none',
                 borderRadius: radii.md,
                 paddingVertical: spacing.md + 2,
                 shadowColor: colors.accentPrimary,
@@ -203,8 +206,8 @@ export default function CookScreen() {
                 shadowRadius: 12,
                 elevation: 8,
                 transitionDuration: 900,
-                transitionTimingFunction: "ease-in-out",
-                transitionProperty: "opacity",
+                transitionTimingFunction: 'ease-in-out',
+                transitionProperty: 'opacity',
               },
             ]}
           >
@@ -217,7 +220,7 @@ export default function CookScreen() {
                   },
                 ]}
               >
-                {isLastIngredient ? "Finish Batch 🎉" : "Not finished"}
+                {isLastIngredient ? 'Finish Batch 🎉' : 'Not finished'}
               </Text>
             </Link>
           </Pressable>
@@ -261,7 +264,7 @@ export default function CookScreen() {
                     idx === currentStepIndex
                       ? colors.accentPrimary
                       : idx < currentStepIndex
-                        ? colors.accentPrimary + "55"
+                        ? colors.accentPrimary + '55'
                         : colors.bgTertiary,
                   width: idx === currentStepIndex ? 18 : 6,
                 },
@@ -295,35 +298,35 @@ export default function CookScreen() {
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     marginBottom: 16,
   },
   abortBtn: { paddingVertical: 8, paddingRight: 8 },
-  headerCenter: { alignItems: "flex-end", flex: 1, paddingLeft: 16 },
-  main: { flex: 1, justifyContent: "center", gap: 0 },
-  scaleCard: { borderWidth: 1, alignItems: "center" },
+  headerCenter: { alignItems: 'flex-end', flex: 1, paddingLeft: 16 },
+  main: { flex: 1, justifyContent: 'center', gap: 0 },
+  scaleCard: { borderWidth: 1, alignItems: 'center' },
   weightRow: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
     marginBottom: 12,
   },
-  progressTrack: { height: 8, width: "100%", overflow: "hidden" },
-  progressFill: { height: "100%" },
-  controls: { flexDirection: "row" },
-  controlBtn: { flex: 1, alignItems: "center" },
+  progressTrack: { height: 8, width: '100%', overflow: 'hidden' },
+  progressFill: { height: '100%' },
+  controls: { flexDirection: 'row' },
+  controlBtn: { flex: 1, alignItems: 'center' },
   controlBtnWide: { flex: 2 },
   overweightAlert: { borderWidth: 1 },
-  backLink: { alignSelf: "flex-start", paddingVertical: 8, marginBottom: 8 },
+  backLink: { alignSelf: 'flex-start', paddingVertical: 8, marginBottom: 8 },
   bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     borderTopWidth: 1,
   },
   navBtn: { paddingVertical: 12, paddingHorizontal: 8 },
-  stepDots: { flexDirection: "row", alignItems: "center", gap: 5 },
+  stepDots: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   dot: { height: 6, borderRadius: 3 },
 });
