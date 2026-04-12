@@ -1,5 +1,6 @@
 // dependencies
 import { Text, Pressable, StyleSheet } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 // context
 import { useTheme } from '@context/ThemeContext';
 
@@ -30,10 +31,15 @@ export default function ToggleThemeButton() {
           textAlign: 'center',
         }}
       >
-        Toggle theme
+
+        <MaterialCommunityIcons
+          size={28}
+          name={mode === 'dark' ? 'sunglasses' : 'weather-night'}
+          color={"inherit"}
+        />
       </Text>
     </Pressable>
   );
 }
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});
