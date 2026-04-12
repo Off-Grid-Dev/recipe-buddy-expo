@@ -9,7 +9,7 @@ import {
   initialWindowMetrics,
 } from "react-native-safe-area-context";
 // context
-import { ThemeProvider, useTheme } from "@/context/ThemeContext";
+import { ThemeProvider, useTheme } from "@context/ThemeContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,8 +26,7 @@ function RootLayoutNav() {
           animation: "slide_from_right",
         }}
       >
-        <Stack.Screen name="index" />
-        <Stack.Screen name="new-recipe" />
+        <Stack.Screen name="(tabs)" />
       </Stack>
     </>
   );
@@ -41,7 +40,9 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync();
+      setTimeout(() => {
+        SplashScreen.hideAsync();
+      }, 800);
     }
   }, [fontsLoaded, fontError]);
 

@@ -1,8 +1,8 @@
 // dependencies
-import React, { createContext, useContext, useState, useCallback } from "react";
-import { useColorScheme } from "react-native";
+import React, { createContext, useContext, useState, useCallback } from 'react';
+import { useColorScheme } from 'react-native';
 // constants
-import { getTheme, ThemeMode, Theme } from "@/constants/theme";
+import { getTheme, ThemeMode, Theme } from '@constants/theme';
 
 type ThemeContextValue = Theme & {
   toggleTheme: () => void;
@@ -10,7 +10,7 @@ type ThemeContextValue = Theme & {
 };
 
 const ThemeContext = createContext<ThemeContextValue>({
-  ...getTheme("light"),
+  ...getTheme('light'),
   toggleTheme: () => {},
   setMode: () => {},
 });
@@ -18,11 +18,11 @@ const ThemeContext = createContext<ThemeContextValue>({
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const systemScheme = useColorScheme();
   const [mode, setModeState] = useState<ThemeMode>(
-    systemScheme === "light" ? "light" : "dark",
+    systemScheme === 'light' ? 'light' : 'dark',
   );
 
   const toggleTheme = useCallback(() => {
-    setModeState((prev) => (prev === "dark" ? "light" : "dark"));
+    setModeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }, []);
 
   const setMode = useCallback((m: ThemeMode) => {

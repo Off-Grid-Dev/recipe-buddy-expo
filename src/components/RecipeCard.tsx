@@ -1,13 +1,13 @@
 // dependencies
-import { useState } from "react";
-import { Pressable, View, Text, StyleSheet, Image } from "react-native";
-import { useRouter } from "expo-router";
+import { useState } from 'react';
+import { Pressable, View, Text, StyleSheet, Image } from 'react-native';
+import { useRouter } from 'expo-router';
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from '@context/ThemeContext';
 // components
-import CategoryBadge from "./CategoryBadge";
+import CategoryBadge from './CategoryBadge';
 // types
-import type { Recipe } from "@/types";
+import type { Recipe } from '@/types';
 
 export default function RecipeCard({ recipe }: { recipe: Recipe }) {
   const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
@@ -25,7 +25,7 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
           backgroundColor: colors.bgSecondary,
           borderRadius: radii.lg,
           borderColor: pressed ? colors.borderAccent : colors.borderSubtle,
-          ...(mode === "dark" ? shadows.card : shadows.cardLight),
+          ...(mode === 'dark' ? shadows.card : shadows.cardLight),
         },
         pressed && { transform: [{ scale: 0.985 }] },
       ]}
@@ -34,21 +34,21 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
       <View
         style={[
           styles.cardImageWrapper,
-          { borderRadius: radii.lg, overflow: "hidden" },
+          { borderRadius: radii.lg, overflow: 'hidden' },
         ]}
       >
         {recipe.imageUrl ? (
           <Image
             source={{ uri: recipe.imageUrl }}
             style={styles.cardImage}
-            resizeMode="cover"
+            resizeMode='cover'
           />
         ) : null}
         {/* Dark overlay so text always reads well */}
         <View
           style={[
             styles.cardImageOverlay,
-            { backgroundColor: "rgba(0,0,0,0.45)" },
+            { backgroundColor: 'rgba(0,0,0,0.45)' },
           ]}
         />
         {/* Monogram fallback */}
@@ -111,24 +111,24 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
 }
 
 const styles = StyleSheet.create({
-  card: { borderWidth: 1, overflow: "hidden" },
+  card: { borderWidth: 1, overflow: 'hidden' },
   cardImageWrapper: {
     height: 170,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  cardImage: { position: "absolute", width: "100%", height: "100%" },
-  cardImageOverlay: { position: "absolute", width: "100%", height: "100%" },
-  cardMonogram: { fontSize: 48, fontWeight: "700", opacity: 0.6 },
+  cardImage: { position: 'absolute', width: '100%', height: '100%' },
+  cardImageOverlay: { position: 'absolute', width: '100%', height: '100%' },
+  cardMonogram: { fontSize: 48, fontWeight: '700', opacity: 0.6 },
   cardContent: { gap: 0 },
   cardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   cardMeta: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderTopWidth: 1,
     paddingTop: 12,
     marginTop: 12,

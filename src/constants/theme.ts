@@ -1,39 +1,39 @@
 // dependencies
-import { Platform, Easing } from "react-native";
+import { Platform, Easing } from 'react-native';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PALETTE — raw values, never reference in components directly
 // ─────────────────────────────────────────────────────────────────────────────
 const palette = {
-  slate200: "#cbd5e1",
-  slate400: "#94a3b8",
-  slate450: "#6b7280",
-  slate500: "#4b6178",
-  slate600: "#434957",
-  slate700: "#323744",
-  slate800: "#252932",
-  slate900: "#1a1d24",
-  slate950: "#0f1115",
+  slate200: '#cbd5e1',
+  slate400: '#94a3b8',
+  slate450: '#6b7280',
+  slate500: '#4b6178',
+  slate600: '#434957',
+  slate700: '#323744',
+  slate800: '#252932',
+  slate900: '#1a1d24',
+  slate950: '#0f1115',
 
-  cream50: "#faf8f3",
-  cream100: "#f2ede0",
-  cream200: "#e8e0cc",
-  cream300: "#d4c9b0",
+  cream50: '#faf8f3',
+  cream100: '#f2ede0',
+  cream200: '#e8e0cc',
+  cream300: '#d4c9b0',
 
-  mint100: "#d1f5ef",
-  mint400: "#7dd3c0",
-  mint500: "#5dbdb0",
-  mint600: "#3fa89b",
+  mint100: '#d1f5ef',
+  mint400: '#7dd3c0',
+  mint500: '#5dbdb0',
+  mint600: '#3fa89b',
 
-  green400: "#4ade80",
-  green600: "#16a34a",
-  red400: "#f87171",
-  red600: "#dc2626",
-  amber400: "#fbbf24",
-  amber600: "#d97706",
+  green400: '#4ade80',
+  green600: '#16a34a',
+  red400: '#f87171',
+  red600: '#dc2626',
+  amber400: '#fbbf24',
+  amber600: '#d97706',
 
-  white: "#ffffff",
-  black: "#000000",
+  white: '#ffffff',
+  black: '#000000',
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -45,6 +45,11 @@ export type ColorTheme = {
   bgSecondary: string;
   bgTertiary: string;
   bgElevated: string;
+  // background lowered opacity
+  bgPrimaryLow: string;
+  bgSecondaryLow: string;
+  bgTertiaryLow: string;
+  bgElevatedLow: string;
   // typography
   textPrimary: string;
   textSecondary: string;
@@ -81,6 +86,11 @@ export const darkColors = {
   bgTertiary: palette.slate800,
   bgElevated: palette.slate700,
 
+  bgPrimaryLow: `${palette.slate950}75`,
+  bgSecondaryLow: `${palette.slate900}75`,
+  bgTertiaryLow: `${palette.slate800}75`,
+  bgElevatedLow: `${palette.slate700}75`,
+
   textPrimary: palette.white,
   textSecondary: palette.slate400,
   textAccent: palette.mint400,
@@ -94,29 +104,38 @@ export const darkColors = {
   accentPrimary: palette.mint400,
   accentPressed: palette.mint500,
   // accentSubtle: "rgba(125, 211, 192, 0.12)",
-  accentSubtle: `color(from ${palette.slate500} r g b / 0.12)`,
+  // accentSubtle: `color(from ${palette.slate500} r g b / 0.12)`,
+  accentSubtle: `${palette.slate500}12`,
   // accentGlow: "rgba(125, 211, 192, 0.25)",
-  accentGlow: `color(from ${palette.slate500} r g b / 0.25)`,
+  // accentGlow: `color(from ${palette.slate500} r g b / 0.25)`,
+  accentGlow: `${palette.slate500}25`,
 
   // borderSubtle: "rgba(255, 255, 255, 0.05)",
-  borderSubtle: `color(from ${palette.slate500} r g b / 0.05)`,
+  // borderSubtle: `color(from ${palette.slate500} r g b / 0.05)`,
+  borderSubtle: `${palette.slate500}05`,
   // borderDefault: "rgba(255, 255, 255, 0.10)",
-  borderDefault: `color(from ${palette.mint400} r g b / 0.10)`,
+  // borderDefault: `color(from ${palette.mint400} r g b / 0.10)`,
+  borderDefault: `${palette.mint400}10`,
   borderAccent: palette.mint400,
 
   // overlay: "rgba(0, 0, 0, 0.65)",
-  overlay: `color(from ${palette.black} r g b / 0.05)`,
-  scrim: "rgba(15, 17, 21, 0.92)",
+  // overlay: `color(from ${palette.black} r g b / 0.05)`,
+  overlay: `${palette.black}05`,
+  // scrim: "rgba(15, 17, 21, 0.92)",
+  scrim: `${palette.slate950}92`,
 
   // Badge-specific
   // badgeGelato: "rgba(125, 211, 192, 0.18)",
-  badgeGelato: `color(from ${palette.mint400} r g b / 0.18)`,
+  // badgeGelato: `color(from ${palette.mint400} r g b / 0.18)`,
+  badgeGelato: `${palette.mint400}18`,
   badgeGelatoText: palette.mint400,
   // badgeSorbetto: "rgba(251, 191, 36, 0.18)",
-  badgeSorbetto: `color(from ${palette.amber400} r g b / 0.18)`,
+  // badgeSorbetto: `color(from ${palette.amber400} r g b / 0.18)`,
+  badgeSorbetto: `${palette.amber400}18`,
   badgeSorbettoText: palette.amber400,
   // badgeCrema: "rgba(255, 255, 255, 0.08)",
-  badgeCrema: `color(from ${palette.black} r g b / 0.18)`,
+  // badgeCrema: `color(from ${palette.black} r g b / 0.18)`,
+  badgeCrema: `${palette.black}18`,
   badgeCremaText: palette.slate400,
 } as const;
 
@@ -126,6 +145,11 @@ export const lightColors: ColorTheme = {
   bgSecondary: palette.cream100,
   bgTertiary: palette.cream200,
   bgElevated: palette.white,
+
+  bgPrimaryLow: `${palette.cream50}75`,
+  bgSecondaryLow: `${palette.cream100}75`,
+  bgTertiaryLow: `${palette.cream200}75`,
+  bgElevatedLow: `${palette.white}75`,
 
   textPrimary: palette.slate950,
   textSecondary: palette.slate500,
@@ -140,28 +164,36 @@ export const lightColors: ColorTheme = {
   accentPrimary: palette.mint600,
   accentPressed: palette.mint500,
   // accentSubtle: "rgba(63, 168, 155, 0.10)",
-  accentSubtle: `color(from ${palette.mint600} r g b / 0.1)`,
+  // accentSubtle: `color(from ${palette.mint600} r g b / 0.1)`,
+  accentSubtle: `${palette.mint600}10`,
   // accentGlow: "rgba(63, 168, 155, 0.20)",
-  accentGlow: `color(from ${palette.mint600} r g b / 0.2)`,
+  // accentGlow: `color(from ${palette.mint600} r g b / 0.2)`,
+  accentGlow: `${palette.mint600}20`,
 
   // borderSubtle: "rgba(0, 0, 0, 0.05)",
-  borderSubtle: `color(from ${palette.black} r g b / 0.05)`,
+  // borderSubtle: `color(from ${palette.black} r g b / 0.05)`,
+  borderSubtle: `${palette.black}05`,
   // borderDefault: "rgba(0, 0, 0, 0.10)",
-  borderDefault: `color(from ${palette.black} r g b / 0.1)`,
+  // borderDefault: `color(from ${palette.black} r g b / 0.1)`,
+  borderDefault: `${palette.black}10`,
   borderAccent: palette.mint600,
 
   // overlay: "rgba(0, 0, 0, 0.4)",
-  overlay: `color(from ${palette.black} r g b / 0.4)`,
+  // overlay: `color(from ${palette.black} r g b / 0.4)`,
+  overlay: `${palette.black}40`,
   scrim: palette.cream50,
 
   // badgeGelato: "rgba(63, 168, 155, 0.12)",
-  badgeGelato: `color(from ${palette.mint600} r g b / 0.12)`,
+  // badgeGelato: `color(from ${palette.mint600} r g b / 0.12)`,
+  badgeGelato: `${palette.mint600}12`,
   badgeGelatoText: palette.mint600,
   // badgeSorbetto: "rgba(217, 119, 6, 0.12)",
-  badgeSorbetto: `color(from ${palette.amber600} r g b / 0.12)`,
+  // badgeSorbetto: `color(from ${palette.amber600} r g b / 0.12)`,
+  badgeSorbetto: `${palette.amber600}12`,
   badgeSorbettoText: palette.amber600,
   // badgeCrema: "rgba(0, 0, 0, 0.06)",
-  badgeCrema: `color(from ${palette.black} r g b / 0.06)`,
+  // badgeCrema: `color(from ${palette.black} r g b / 0.06)`,
+  badgeCrema: `${palette.black}06`,
   badgeCremaText: palette.slate450,
 } as const;
 
@@ -169,8 +201,8 @@ export const lightColors: ColorTheme = {
 // TYPOGRAPHY
 // ─────────────────────────────────────────────────────────────────────────────
 export const fonts = {
-  main: "Inter",
-  display: "PlayfairDisplay",
+  main: 'Inter',
+  display: 'PlayfairDisplay',
 } as const;
 
 export const fontSizes = {
@@ -186,10 +218,10 @@ export const fontSizes = {
 } as const;
 
 export const fontWeights = {
-  regular: "400" as const,
-  medium: "500" as const,
-  semibold: "600" as const,
-  bold: "700" as const,
+  regular: '400' as const,
+  medium: '500' as const,
+  semibold: '600' as const,
+  bold: '700' as const,
 } as const;
 
 export const lineHeights = {
@@ -243,7 +275,7 @@ export const textStyles = {
     fontWeight: fontWeights.semibold,
     lineHeight: fontSizes.xs * 1.4,
     letterSpacing: 0.9,
-    textTransform: "uppercase" as const,
+    textTransform: 'uppercase' as const,
   },
   button: {
     fontFamily: fonts.main,
@@ -316,7 +348,7 @@ export const radii = {
 export const shadows = {
   sm: Platform.select({
     ios: {
-      shadowColor: "#000",
+      shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.18,
       shadowRadius: 4,
@@ -326,7 +358,7 @@ export const shadows = {
   }),
   card: Platform.select({
     ios: {
-      shadowColor: "#000",
+      shadowColor: '#000',
       shadowOffset: { width: 0, height: 10 },
       shadowOpacity: 0.5,
       shadowRadius: 15,
@@ -336,7 +368,7 @@ export const shadows = {
   }),
   lg: Platform.select({
     ios: {
-      shadowColor: "#000",
+      shadowColor: '#000',
       shadowOffset: { width: 0, height: 20 },
       shadowOpacity: 0.6,
       shadowRadius: 25,
@@ -346,7 +378,7 @@ export const shadows = {
   }),
   cardLight: Platform.select({
     ios: {
-      shadowColor: "#8b7355",
+      shadowColor: '#8b7355',
       shadowOffset: { width: 0, height: 6 },
       shadowOpacity: 0.18,
       shadowRadius: 12,
@@ -385,11 +417,11 @@ export const zIndex = {
 // ─────────────────────────────────────────────────────────────────────────────
 // THEME FACTORY
 // ─────────────────────────────────────────────────────────────────────────────
-export type ThemeMode = "dark" | "light";
+export type ThemeMode = 'dark' | 'light';
 
-export const getTheme = (mode: ThemeMode = "light") =>
+export const getTheme = (mode: ThemeMode = 'light') =>
   ({
-    colors: mode === "dark" ? darkColors : lightColors,
+    colors: mode === 'dark' ? darkColors : lightColors,
     fonts,
     fontSizes,
     fontWeights,
@@ -405,5 +437,5 @@ export const getTheme = (mode: ThemeMode = "light") =>
 
 export type Theme = ReturnType<typeof getTheme>;
 
-const theme = getTheme("light");
+const theme = getTheme('light');
 export default theme;
