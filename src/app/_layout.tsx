@@ -1,15 +1,15 @@
 // dependencies
-import { useEffect } from "react";
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from 'react';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 import {
   SafeAreaProvider,
   initialWindowMetrics,
-} from "react-native-safe-area-context";
+} from 'react-native-safe-area-context';
 // context
-import { ThemeProvider, useTheme } from "@context/ThemeContext";
+import { ThemeProvider, useTheme } from '@context/ThemeContext';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -18,15 +18,16 @@ function RootLayoutNav() {
 
   return (
     <>
-      <StatusBar style={mode === "dark" ? "light" : "dark"} />
+      <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
       <Stack
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: colors.bgPrimary },
-          animation: "slide_from_right",
+          animation: 'slide_from_right',
         }}
       >
-        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name='(auth)' />
+        <Stack.Screen name='(tabs)' />
       </Stack>
     </>
   );
@@ -34,8 +35,8 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
-    Inter: require("../../assets/fonts/Inter-VariableFont_opsz,wght.ttf"),
-    PlayfairDisplay: require("../../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf"),
+    Inter: require('../../assets/fonts/Inter-VariableFont_opsz,wght.ttf'),
+    PlayfairDisplay: require('../../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf'),
   });
 
   useEffect(() => {
