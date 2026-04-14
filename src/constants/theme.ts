@@ -40,44 +40,7 @@ const palette = {
 // SEMANTIC COLOR TOKENS — use these in components, never raw palette
 // ─────────────────────────────────────────────────────────────────────────────
 export type ColorTheme = {
-  // background colors
-  bgPrimary: string;
-  bgSecondary: string;
-  bgTertiary: string;
-  bgElevated: string;
-  // background lowered opacity
-  bgPrimaryLow: string;
-  bgSecondaryLow: string;
-  bgTertiaryLow: string;
-  bgElevatedLow: string;
-  // typography
-  textPrimary: string;
-  textSecondary: string;
-  textAccent: string;
-  textAccentPressed: string;
-  textDisabled: string;
-  // semaphores
-  success: string;
-  error: string;
-  warning: string;
-  // accent colors
-  accentPrimary: string;
-  accentPressed: string;
-  accentSubtle: string;
-  accentGlow: string;
-  // layout colors
-  borderSubtle: string;
-  borderDefault: string;
-  borderAccent: string;
-  overlay: string;
-  scrim: string;
-  // Badge-specific
-  badgeGelato: string;
-  badgeGelatoText: string;
-  badgeSorbetto: string;
-  badgeSorbettoText: string;
-  badgeCrema: string;
-  badgeCremaText: string;
+  [key: string]: string;
 };
 
 export const darkColors = {
@@ -103,38 +66,21 @@ export const darkColors = {
 
   accentPrimary: palette.mint400,
   accentPressed: palette.mint500,
-  // accentSubtle: "rgba(125, 211, 192, 0.12)",
-  // accentSubtle: `color(from ${palette.slate500} r g b / 0.12)`,
   accentSubtle: `${palette.slate500}12`,
-  // accentGlow: "rgba(125, 211, 192, 0.25)",
-  // accentGlow: `color(from ${palette.slate500} r g b / 0.25)`,
   accentGlow: `${palette.slate500}25`,
 
-  // borderSubtle: "rgba(255, 255, 255, 0.05)",
-  // borderSubtle: `color(from ${palette.slate500} r g b / 0.05)`,
   borderSubtle: `${palette.slate500}05`,
-  // borderDefault: "rgba(255, 255, 255, 0.10)",
-  // borderDefault: `color(from ${palette.mint400} r g b / 0.10)`,
   borderDefault: `${palette.mint400}10`,
   borderAccent: palette.mint400,
 
-  // overlay: "rgba(0, 0, 0, 0.65)",
-  // overlay: `color(from ${palette.black} r g b / 0.05)`,
   overlay: `${palette.black}05`,
-  // scrim: "rgba(15, 17, 21, 0.92)",
   scrim: `${palette.slate950}92`,
 
   // Badge-specific
-  // badgeGelato: "rgba(125, 211, 192, 0.18)",
-  // badgeGelato: `color(from ${palette.mint400} r g b / 0.18)`,
   badgeGelato: `${palette.mint400}18`,
   badgeGelatoText: palette.mint400,
-  // badgeSorbetto: "rgba(251, 191, 36, 0.18)",
-  // badgeSorbetto: `color(from ${palette.amber400} r g b / 0.18)`,
   badgeSorbetto: `${palette.amber400}18`,
   badgeSorbettoText: palette.amber400,
-  // badgeCrema: "rgba(255, 255, 255, 0.08)",
-  // badgeCrema: `color(from ${palette.black} r g b / 0.18)`,
   badgeCrema: `${palette.black}18`,
   badgeCremaText: palette.slate400,
 } as const;
@@ -163,36 +109,20 @@ export const lightColors: ColorTheme = {
 
   accentPrimary: palette.mint600,
   accentPressed: palette.mint500,
-  // accentSubtle: "rgba(63, 168, 155, 0.10)",
-  // accentSubtle: `color(from ${palette.mint600} r g b / 0.1)`,
   accentSubtle: `${palette.mint600}10`,
-  // accentGlow: "rgba(63, 168, 155, 0.20)",
-  // accentGlow: `color(from ${palette.mint600} r g b / 0.2)`,
   accentGlow: `${palette.mint600}20`,
 
-  // borderSubtle: "rgba(0, 0, 0, 0.05)",
-  // borderSubtle: `color(from ${palette.black} r g b / 0.05)`,
   borderSubtle: `${palette.black}05`,
-  // borderDefault: "rgba(0, 0, 0, 0.10)",
-  // borderDefault: `color(from ${palette.black} r g b / 0.1)`,
   borderDefault: `${palette.black}10`,
   borderAccent: palette.mint600,
 
-  // overlay: "rgba(0, 0, 0, 0.4)",
-  // overlay: `color(from ${palette.black} r g b / 0.4)`,
   overlay: `${palette.black}40`,
   scrim: palette.cream50,
 
-  // badgeGelato: "rgba(63, 168, 155, 0.12)",
-  // badgeGelato: `color(from ${palette.mint600} r g b / 0.12)`,
   badgeGelato: `${palette.mint600}12`,
   badgeGelatoText: palette.mint600,
-  // badgeSorbetto: "rgba(217, 119, 6, 0.12)",
-  // badgeSorbetto: `color(from ${palette.amber600} r g b / 0.12)`,
   badgeSorbetto: `${palette.amber600}12`,
   badgeSorbettoText: palette.amber600,
-  // badgeCrema: "rgba(0, 0, 0, 0.06)",
-  // badgeCrema: `color(from ${palette.black} r g b / 0.06)`,
   badgeCrema: `${palette.black}06`,
   badgeCremaText: palette.slate450,
 } as const;
@@ -318,6 +248,10 @@ export const textStyles = {
 // ─────────────────────────────────────────────────────────────────────────────
 // SPACING — 4pt grid
 // ─────────────────────────────────────────────────────────────────────────────
+export type ThemeSpacing = {
+  [key: string]: number;
+};
+
 export const spacing = {
   xxs: 2,
   xs: 4,
@@ -332,6 +266,10 @@ export const spacing = {
 // ─────────────────────────────────────────────────────────────────────────────
 // BORDER RADIUS
 // ─────────────────────────────────────────────────────────────────────────────
+export type ThemeRadii = {
+  [key: string]: number;
+};
+
 export const radii = {
   xs: 4,
   sm: 6,
@@ -345,6 +283,13 @@ export const radii = {
 // ─────────────────────────────────────────────────────────────────────────────
 // SHADOWS
 // ─────────────────────────────────────────────────────────────────────────────
+export type ThemeShadows = {
+  sm: object;
+  card: object;
+  lg: object;
+  cardLight: object;
+};
+
 export const shadows = {
   sm: Platform.select({
     ios: {

@@ -1,3 +1,4 @@
+// dependencies
 import { useState, useRef } from 'react';
 import {
   View,
@@ -13,7 +14,15 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { Image } from 'expo-image';
 import { SafeAreaView } from 'react-native-safe-area-context';
+// context
 import { useTheme } from '@context/ThemeContext';
+// types
+import {
+  ColorTheme,
+  ThemeSpacing,
+  ThemeRadii,
+  ThemeShadows,
+} from '@constants/theme';
 
 type AuthTab = 'login' | 'signup';
 
@@ -214,7 +223,12 @@ export default function AuthScreen() {
   );
 }
 
-function createStyles(colors: any, spacing: any, radii: any, shadows: any) {
+function createStyles(
+  colors: ColorTheme,
+  spacing: ThemeSpacing,
+  radii: ThemeRadii,
+  shadows: ThemeShadows,
+) {
   return StyleSheet.create({
     flex: { flex: 1 },
     safeArea: {
