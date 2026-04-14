@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Image } from 'expo-image';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // context
 import { useTheme } from '@context/ThemeContext';
 // types
@@ -28,6 +28,7 @@ type AuthTab = 'login' | 'signup';
 
 export default function AuthScreen() {
   const { colors, spacing, radii, shadows } = useTheme();
+  const { top, right, bottom, left } = useSafeAreaInsets();
   const [activeTab, setActiveTab] = useState<AuthTab>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,10 +59,19 @@ export default function AuthScreen() {
     }
   };
 
-  const styles = createStyles(colors, spacing, radii, shadows);
+  const styles = createStyles(
+    colors,
+    spacing,
+    radii,
+    shadows,
+    top,
+    right,
+    bottom,
+    left,
+  );
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <StatusBar style='light' />
 
       {/* Ambient background orbs */}
@@ -219,7 +229,7 @@ export default function AuthScreen() {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -228,11 +238,19 @@ function createStyles(
   spacing: ThemeSpacing,
   radii: ThemeRadii,
   shadows: ThemeShadows,
+  top: number,
+  right: number,
+  bottom: number,
+  left: number,
 ) {
   return StyleSheet.create({
     flex: { flex: 1 },
     safeArea: {
       flex: 1,
+      paddingTop: top,
+      paddingRight: right,
+      paddingBottom: bottom,
+      paddingLeft: left,
       backgroundColor: colors.bgPrimary,
     },
     scroll: {
