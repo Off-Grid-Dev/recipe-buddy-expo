@@ -24,11 +24,11 @@ export default function HomeScreen() {
   const styles = createStyles(
     colors,
     spacing,
-    radii,
-    textStyles,
-    fontSizes,
-    shadows,
-    mode,
+    // radii,
+    // textStyles,
+    // fontSizes,
+    // shadows,
+    // mode,
     top,
     right,
     bottom,
@@ -158,11 +158,11 @@ export default function HomeScreen() {
 function createStyles(
   colors: ColorTheme,
   spacing: ThemeSpacing,
-  radii: ThemeRadii,
-  textStyles: any,
-  fontSizes: any,
-  shadows: any,
-  mode: any,
+  // radii: ThemeRadii,
+  // textStyles: any,
+  // fontSizes: any,
+  // shadows: any,
+  // mode: any,
   top: number,
   right: number,
   bottom: number,
@@ -170,6 +170,7 @@ function createStyles(
 ) {
   return StyleSheet.create({
     safeView: {
+      backgroundColor: colors.bgPrimary,
       flex: 1,
       paddingTop: top,
       paddingRight: right,
@@ -177,8 +178,12 @@ function createStyles(
       paddingLeft: left,
     },
     listContent: { flexGrow: 1, paddingHorizontal: spacing.md },
-    header: { alignItems: 'center', marginBottom: 4, paddingTop: spacing.xl },
-    logoStack: { alignItems: 'center', gap: 10 },
+    header: {
+      alignItems: 'center',
+      marginBottom: spacing.xs,
+      paddingTop: spacing.xl,
+    },
+    logoStack: { alignItems: 'center', gap: spacing.sm },
     logoImage: { width: 54, height: 54, marginBottom: -16 },
     logoText: { color: colors.textAccent },
     searchWrapper: {

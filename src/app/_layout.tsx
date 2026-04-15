@@ -27,7 +27,7 @@ function RootLayoutNav() {
           animation: 'slide_from_right',
         }}
       >
-        <Stack.Screen name='(auth)' />
+        <Stack.Screen name='(auth)/index' />
         <Stack.Screen name='(tabs)' />
       </Stack>
     </>
