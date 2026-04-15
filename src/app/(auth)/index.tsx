@@ -11,6 +11,7 @@ import {
   ScrollView,
   Animated,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Image } from 'expo-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -34,6 +35,7 @@ export default function AuthScreen() {
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
   const tabAnim = useRef(new Animated.Value(0)).current;
+  const router = useRouter();
 
   const switchTab = (tab: AuthTab) => {
     Animated.timing(tabAnim, {
@@ -91,7 +93,7 @@ export default function AuthScreen() {
           <View style={styles.logoArea}>
             <View style={styles.logoIcon}>
               <Image
-                source={require('./assets/spash-icon.png')}
+                source={require('../../../assets/icons/splash-icon.png')}
                 style={styles.logoImage}
               />
             </View>
@@ -219,6 +221,16 @@ export default function AuthScreen() {
             >
               <Text style={styles.btnGoogleText}>Continue with Google</Text>
             </Pressable>
+            {/* Link to rest of app */}
+            <Pressable
+              style={({ pressed }) => [
+                styles.btnGoogle,
+                pressed && styles.btnGooglePressed,
+              ]}
+              onPress={() => router.push('/(tabs)')}
+            >
+              <Text style={styles.btnGoogleText}>See App</Text>
+            </Pressable>
 
             {/* Terms */}
             <Text style={styles.terms}>
@@ -267,7 +279,7 @@ function createStyles(
       height: 280,
       borderRadius: 140,
       backgroundColor: colors.accentPrimary,
-      opacity: 0.07,
+      opacity: 0.12,
       top: -80,
       right: -60,
     },
@@ -277,7 +289,7 @@ function createStyles(
       height: 180,
       borderRadius: 90,
       backgroundColor: colors.accentPrimary,
-      opacity: 0.06,
+      opacity: 0.11,
       bottom: -50,
       left: -40,
     },
@@ -291,7 +303,7 @@ function createStyles(
       width: 56,
       height: 56,
       borderRadius: 16,
-      backgroundColor: colors.accentPrimary,
+      backgroundColor: colors.bgElevated,
       alignItems: 'center',
       justifyContent: 'center',
       marginBottom: spacing.sm,

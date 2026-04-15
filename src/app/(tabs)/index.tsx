@@ -9,6 +9,7 @@ import RecipeCard from '@components/RecipeCard';
 import ToggleThemeButton from '@components/buttons/ToggleTheme';
 // constants
 import MOCK_RECIPES from '@constants/mockData';
+import { Image } from 'expo-image';
 
 export default function HomeScreen() {
   const { colors, spacing, radii, textStyles, fontSizes, shadows, mode } =
@@ -51,8 +52,12 @@ export default function HomeScreen() {
           <>
             {/* ── Header ── */}
             <View style={[styles.header, { paddingTop: spacing.xl }]}>
-              <View style={styles.logoRow}>
-                <Text style={styles.logoEmoji}>❄️</Text>
+              <View style={styles.logoStack}>
+                {/* <Text style={styles.logoEmoji}>❄️</Text> */}
+                <Image
+                  style={styles.logoImage}
+                  source={require('../../../assets/icons/splash-icon.png')}
+                />
                 <Text style={[textStyles.h1, { color: colors.textAccent }]}>
                   Recipe Buddy
                 </Text>
@@ -149,8 +154,9 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   listContent: { flexGrow: 1 },
   header: { alignItems: 'center', marginBottom: 4 },
-  logoRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  logoEmoji: { fontSize: 28 },
+  logoStack: { alignItems: 'center', gap: 10 },
+  // logoEmoji: { fontSize: 28 },
+  logoImage: { width: 54, height: 54, marginBottom: -16 },
   searchWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
