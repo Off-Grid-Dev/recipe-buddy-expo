@@ -1,16 +1,14 @@
-// dependencies
 import { Image } from 'expo-image';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 
-// context
+import { useAuth } from '@context/AuthContext';
 import { useTheme } from '@context/ThemeContext';
 
-// components
 import ToggleThemeButton from '@components/buttons/ToggleTheme';
 
-// ─── Overview Screen ──────────────────────────────────────────────────────────
 export default function RecipeOverviewScreen() {
-  const { colors, spacing } = useTheme();
+  const { colors, spacing, radii } = useTheme();
+  const { isLoggedIn, handleLogin, handleLogout } = useAuth();
   return (
     <View style={{ flex: 1 }}>
       <ToggleThemeButton />
@@ -41,6 +39,31 @@ export default function RecipeOverviewScreen() {
             borderColor: colors.accentPrimary,
           }}
         />
+        <Text
+          style={{
+            color: colors.textPrimary,
+            marginBottom: spacing.md,
+            fontWeight: 600,
+            fontSize: 24,
+          }}
+        >
+          is {!isLoggedIn && 'not '}logged in.
+        </Text>
+        <Pressable
+          style={{
+            paddingInline: spacing.lg,
+            paddingBlock: spacing.sm,
+            backgroundColor: colors.bgTertiary,
+            borderRadius: radii.md,
+            borderWidth: 2,
+            borderColor: !isLoggedIn ? colors.success : colors.warning,
+          }}
+          onPress={() => (isLoggedIn ? handleLogout() : handleLogin())}
+        >
+          <Text style={{ color: colors.textPrimary }}>
+            Log {isLoggedIn ? 'out' : 'in'}
+          </Text>
+        </Pressable>
       </View>
     </View>
   );

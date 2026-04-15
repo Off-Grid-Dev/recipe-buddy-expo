@@ -1,4 +1,5 @@
 // dependencies
+import ToggleThemeButton from '@/components/buttons/ToggleTheme';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -86,6 +87,7 @@ export default function AuthScreen() {
         style={styles.flex}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
+        <ToggleThemeButton />
         <ScrollView
           contentContainerStyle={styles.scroll}
           keyboardShouldPersistTaps='handled'
@@ -277,23 +279,23 @@ function createStyles(
     // Ambient orbs
     orbTop: {
       position: 'absolute',
-      width: 280,
-      height: 280,
-      borderRadius: 140,
+      width: 220,
+      aspectRatio: 1,
+      borderRadius: radii.full,
       backgroundColor: colors.accentPrimary,
       opacity: 0.12,
       top: -80,
-      right: -60,
+      left: -60,
     },
     orbBottom: {
       position: 'absolute',
-      width: 180,
-      height: 180,
-      borderRadius: 90,
+      width: 140,
+      aspectRatio: 1,
+      borderRadius: radii.full,
       backgroundColor: colors.accentPrimary,
       opacity: 0.11,
       bottom: -50,
-      left: -40,
+      right: -40,
     },
 
     // Logo area

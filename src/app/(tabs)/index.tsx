@@ -1,19 +1,15 @@
-// dependencies
-import { ColorTheme, ThemeRadii, ThemeSpacing } from '@/constants/theme';
 import { Image } from 'expo-image';
 import React, { useMemo, useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-// context
 import { useTheme } from '@context/ThemeContext';
 
-// components
 import ToggleThemeButton from '@components/buttons/ToggleTheme';
 import RecipeCard from '@components/ui/RecipeCard';
 
-// constants
 import MOCK_RECIPES from '@constants/mockData';
+import { ColorTheme, ThemeSpacing } from '@constants/theme';
 
 export default function HomeScreen() {
   const { colors, spacing, radii, textStyles, fontSizes, shadows, mode } =

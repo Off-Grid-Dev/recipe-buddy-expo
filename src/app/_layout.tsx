@@ -1,4 +1,3 @@
-// dependencies
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -9,7 +8,7 @@ import {
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
 
-// context
+import { AuthProvider } from '@context/AuthContext';
 import { ThemeProvider, useTheme } from '@context/ThemeContext';
 
 SplashScreen.preventAutoHideAsync();
@@ -52,9 +51,11 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <ThemeProvider>
-        <RootLayoutNav />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <RootLayoutNav />
+        </ThemeProvider>
+      </AuthProvider>
     </SafeAreaProvider>
   );
 }
