@@ -1,5 +1,5 @@
 // dependencies
-import { Platform, Easing } from 'react-native';
+import { Easing, Platform } from 'react-native';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PALETTE — raw values, never reference in components directly

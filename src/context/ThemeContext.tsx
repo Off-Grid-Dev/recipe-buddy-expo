@@ -1,8 +1,9 @@
 // dependencies
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 import { useColorScheme } from 'react-native';
+
 // constants
-import { getTheme, ThemeMode, Theme } from '@constants/theme';
+import { Theme, ThemeMode, getTheme } from '@constants/theme';
 
 type ThemeContextValue = Theme & {
   toggleTheme: () => void;

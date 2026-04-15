@@ -1,8 +1,9 @@
 // dependencies
 import { Stack } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 // context
 import { useTheme } from '@context/ThemeContext';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function RecipeLayout() {
   const { colors } = useTheme();

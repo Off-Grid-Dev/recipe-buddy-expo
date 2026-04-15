@@ -1,30 +1,34 @@
 // dependencies
-import React, { useState, useMemo } from "react";
+import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useMemo, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TextInput,
   Pressable,
-} from "react-native";
-import { useRouter, useLocalSearchParams, Link } from "expo-router";
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 // context
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from '@context/ThemeContext';
+
 // components
-import ToggleThemeButton from "@/components/buttons/ToggleTheme";
+import ToggleThemeButton from '@components/buttons/ToggleTheme';
+
 // constants
-import MOCK_RECIPES from "@/constants/mockData";
+import MOCK_RECIPES from '@constants/mockData';
+
 // types
-import { Recipe, IngredientGroup } from "@/types";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { IngredientGroup, Recipe } from '@/types';
 
 const INGREDIENT_GROUP_ORDER: IngredientGroup[] = [
-  "liquids",
-  "sugars",
-  "stabilizers",
-  "flavorings",
-  "solids",
+  'liquids',
+  'sugars',
+  'stabilizers',
+  'flavorings',
+  'solids',
 ];
 
 // ─── Overview Screen ──────────────────────────────────────────────────────────
@@ -65,7 +69,10 @@ export default function RecipeOverviewScreen() {
         showsVerticalScrollIndicator={false}
       >
         {/* ── Back link ── */}
-        <Link href="/" asChild>
+        <Link
+          href='/'
+          asChild
+        >
           <Pressable
             style={StyleSheet.flatten([
               styles.backLink,
@@ -138,7 +145,7 @@ export default function RecipeOverviewScreen() {
               ]}
               value={batchSize}
               onChangeText={setBatchSize}
-              keyboardType="numeric"
+              keyboardType='numeric'
               selectTextOnFocus
             />
           </View>
@@ -161,7 +168,7 @@ export default function RecipeOverviewScreen() {
               backgroundColor: colors.bgSecondary,
               borderRadius: radii.lg,
               borderColor: colors.borderSubtle,
-              ...(mode === "dark" ? shadows.card : shadows.cardLight),
+              ...(mode === 'dark' ? shadows.card : shadows.cardLight),
             },
           ]}
         >
@@ -212,10 +219,10 @@ export default function RecipeOverviewScreen() {
                       textStyles.body,
                       {
                         color: colors.textPrimary,
-                        fontWeight: "600",
+                        fontWeight: '600',
                         marginHorizontal: spacing.md,
                         minWidth: 70,
-                        textAlign: "right",
+                        textAlign: 'right',
                       },
                     ]}
                   >
@@ -228,7 +235,7 @@ export default function RecipeOverviewScreen() {
                       {
                         color: colors.textSecondary,
                         minWidth: 40,
-                        textAlign: "right",
+                        textAlign: 'right',
                       },
                     ]}
                   >
@@ -351,7 +358,7 @@ export default function RecipeOverviewScreen() {
             <Text
               style={[
                 textStyles.body,
-                { color: colors.textAccent, fontWeight: "700" },
+                { color: colors.textAccent, fontWeight: '700' },
               ]}
             >
               Required Aging: {recipe.agingTimeHours} Hours at 4°C
@@ -373,8 +380,8 @@ export default function RecipeOverviewScreen() {
         style={[
           styles.footer,
           {
-            backgroundColor: "transparent",
-            borderColor: "transparent",
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
             paddingBottom: spacing.lg,
             paddingHorizontal: spacing.md,
             paddingTop: spacing.md,
@@ -412,45 +419,45 @@ export default function RecipeOverviewScreen() {
 
 const styles = StyleSheet.create({
   scrollContent: { flexGrow: 1 },
-  backLink: { alignSelf: "flex-start", paddingVertical: 8, marginBottom: 8 },
+  backLink: { alignSelf: 'flex-start', paddingVertical: 8, marginBottom: 8 },
   recipeHeader: { borderBottomWidth: 1 },
   yieldControl: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderWidth: 1,
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     minWidth: 200,
   },
-  yieldInput: { textAlign: "right", fontWeight: "700", minWidth: 80 },
-  section: { borderWidth: 1, overflow: "hidden" },
-  ingredientRow: { flexDirection: "row", alignItems: "center" },
+  yieldInput: { textAlign: 'right', fontWeight: '700', minWidth: 80 },
+  section: { borderWidth: 1, overflow: 'hidden' },
+  ingredientRow: { flexDirection: 'row', alignItems: 'center' },
   stepCard: {
-    flexDirection: "row",
-    alignItems: "flex-start",
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     borderLeftWidth: 3,
   },
   stepNumberCircle: {
     width: 30,
     height: 30,
     borderRadius: 15,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginRight: 14,
     flexShrink: 0,
   },
   stepInfo: { flex: 1, gap: 6 },
-  stepBadges: { flexDirection: "row", gap: 6, flexWrap: "wrap" },
+  stepBadges: { flexDirection: 'row', gap: 6, flexWrap: 'wrap' },
   metaBadge: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: 4 },
-  agingAlert: { flexDirection: "row", alignItems: "center", borderWidth: 1 },
+  agingAlert: { flexDirection: 'row', alignItems: 'center', borderWidth: 1 },
   footer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
     borderTopWidth: 1,
   },
-  startBtn: { alignItems: "center" },
+  startBtn: { alignItems: 'center' },
 });

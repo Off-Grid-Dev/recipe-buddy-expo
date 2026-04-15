@@ -1,28 +1,30 @@
 // dependencies
-import { useState, useRef } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Animated,
-} from 'react-native';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { Image } from 'expo-image';
+import { useRef, useState } from 'react';
+import {
+  Animated,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 // context
 import { useTheme } from '@context/ThemeContext';
+
 // types
 import {
   ColorTheme,
-  ThemeSpacing,
   ThemeRadii,
   ThemeShadows,
+  ThemeSpacing,
 } from '@constants/theme';
 
 type AuthTab = 'login' | 'signup';

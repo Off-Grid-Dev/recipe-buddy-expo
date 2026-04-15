@@ -7,5 +7,17 @@
   "quoteProps": "consistent",
   "jsxSingleQuote": true,
   "singleAttributePerLine": true,
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "<BUILTIN_MODULES>",
+    "<THIRD_PARTY_MODULES>",
+    "^@context/(.*)$",
+    "^@components/(.*)$",
+    "^@constants/(.*)$",
+    "^@/types(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

@@ -1,15 +1,19 @@
 // dependencies
-import React, { useState, useMemo } from 'react';
-import { View, Text, StyleSheet, FlatList, TextInput } from 'react-native';
+import { ColorTheme, ThemeRadii, ThemeSpacing } from '@/constants/theme';
+import { Image } from 'expo-image';
+import React, { useMemo, useState } from 'react';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 // context
 import { useTheme } from '@context/ThemeContext';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 // components
-import RecipeCard from '@components/RecipeCard';
 import ToggleThemeButton from '@components/buttons/ToggleTheme';
+import RecipeCard from '@components/ui/RecipeCard';
+
 // constants
 import MOCK_RECIPES from '@constants/mockData';
-import { Image } from 'expo-image';
 
 export default function HomeScreen() {
   const { colors, spacing, radii, textStyles, fontSizes, shadows, mode } =
@@ -17,6 +21,19 @@ export default function HomeScreen() {
   const { top, right, bottom, left } = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
+  const styles = createStyles(
+    colors,
+    spacing,
+    radii,
+    textStyles,
+    fontSizes,
+    shadows,
+    mode,
+    top,
+    right,
+    bottom,
+    left,
+  );
 
   const filteredRecipes = useMemo(() => {
     const q = searchQuery.toLowerCase();
@@ -29,36 +46,24 @@ export default function HomeScreen() {
   }, [searchQuery]);
 
   return (
-    <View
-      style={{
-        paddingTop: top,
-        paddingRight: right,
-        paddingBottom: bottom,
-        paddingLeft: left,
-        backgroundColor: colors.bgPrimary,
-      }}
-    >
+    <View style={styles.safeView}>
       <ToggleThemeButton />
 
       <FlatList
         data={filteredRecipes}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={[
-          styles.listContent,
-          { paddingHorizontal: spacing.md },
-        ]}
+        contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <>
             {/* ── Header ── */}
-            <View style={[styles.header, { paddingTop: spacing.xl }]}>
+            <View style={styles.header}>
               <View style={styles.logoStack}>
-                {/* <Text style={styles.logoEmoji}>❄️</Text> */}
                 <Image
                   style={styles.logoImage}
                   source={require('../../../assets/icons/splash-icon.png')}
                 />
-                <Text style={[textStyles.h1, { color: colors.textAccent }]}>
+                <Text style={[styles.logoText, textStyles.h1, {}]}>
                   Recipe Buddy
                 </Text>
               </View>
@@ -150,21 +155,41 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  safeArea: { flex: 1 },
-  listContent: { flexGrow: 1 },
-  header: { alignItems: 'center', marginBottom: 4 },
-  logoStack: { alignItems: 'center', gap: 10 },
-  // logoEmoji: { fontSize: 28 },
-  logoImage: { width: 54, height: 54, marginBottom: -16 },
-  searchWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderWidth: 1,
-  },
-  searchIcon: { fontSize: 16, marginRight: 10 },
-  searchInput: { flex: 1, padding: 0 },
-  emptyState: { alignItems: 'center', paddingVertical: 60 },
-});
+function createStyles(
+  colors: ColorTheme,
+  spacing: ThemeSpacing,
+  radii: ThemeRadii,
+  textStyles: any,
+  fontSizes: any,
+  shadows: any,
+  mode: any,
+  top: number,
+  right: number,
+  bottom: number,
+  left: number,
+) {
+  return StyleSheet.create({
+    safeView: {
+      flex: 1,
+      paddingTop: top,
+      paddingRight: right,
+      paddingBottom: bottom,
+      paddingLeft: left,
+    },
+    listContent: { flexGrow: 1, paddingHorizontal: spacing.md },
+    header: { alignItems: 'center', marginBottom: 4, paddingTop: spacing.xl },
+    logoStack: { alignItems: 'center', gap: 10 },
+    logoImage: { width: 54, height: 54, marginBottom: -16 },
+    logoText: { color: colors.textAccent },
+    searchWrapper: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      paddingVertical: 14,
+      borderWidth: 1,
+    },
+    searchIcon: { fontSize: 16, marginRight: 10 },
+    searchInput: { flex: 1, padding: 0 },
+    emptyState: { alignItems: 'center', paddingVertical: 60 },
+  });
+}

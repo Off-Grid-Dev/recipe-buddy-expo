@@ -1,17 +1,21 @@
 // dependencies
-import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
-import { useRouter, useLocalSearchParams, Link } from 'expo-router';
+import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useCallback, useState } from 'react';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 // context
 import { useTheme } from '@context/ThemeContext';
+
 // components
 import ToggleThemeButton from '@components/buttons/ToggleTheme';
+
 // constants
-import { fontWeights } from '@constants/theme';
 import MOCK_RECIPES from '@constants/mockData';
+import { fontWeights } from '@constants/theme';
+
 // types
-import { Recipe, Ingredient } from '@/types';
+import { Ingredient, Recipe } from '@/types';
 
 // ─── Cook Screen ──────────────────────────────────────────────────────────────
 export default function CookScreen() {

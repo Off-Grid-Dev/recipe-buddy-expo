@@ -1,7 +1,9 @@
 // dependencies
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
+
 // context
 import { useTheme } from '@context/ThemeContext';
+
 // components
 import ToggleThemeButton from '@components/buttons/ToggleTheme';
 

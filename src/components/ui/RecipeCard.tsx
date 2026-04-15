@@ -1,13 +1,16 @@
 // dependencies
-import { useState } from 'react';
-import { Pressable, View, Text, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+
 // context
 import { useTheme } from '@context/ThemeContext';
-// components
-import CategoryBadge from './CategoryBadge';
+
 // types
 import type { Recipe } from '@/types';
+
+// components
+import CategoryBadge from './CategoryBadge';
 
 export default function RecipeCard({ recipe }: { recipe: Recipe }) {
   const { colors, spacing, radii, textStyles, shadows, mode } = useTheme();
