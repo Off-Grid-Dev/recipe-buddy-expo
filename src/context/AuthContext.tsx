@@ -1,4 +1,3 @@
-import createUser from '@/lib/createUser';
 import { supabase } from '@utils/supabase';
 import React, {
   ReactNode,
@@ -8,6 +7,8 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+
+import createUser from '../../lib/createUser';
 
 type AuthContextValue = {
   user: any | null;
