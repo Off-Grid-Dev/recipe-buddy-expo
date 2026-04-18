@@ -1,10 +1,10 @@
-// dependencies
 import ToggleThemeButton from '@/components/buttons/ToggleTheme';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
+  Alert,
   Animated,
   KeyboardAvoidingView,
   Platform,
@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useAuth } from '@context/AuthContext';
 import { useTheme } from '@context/ThemeContext';
 
 import {
@@ -30,13 +31,29 @@ type AuthTab = 'login' | 'signup';
 
 export default function AuthScreen() {
   const { colors, spacing, radii, shadows } = useTheme();
+  const {
+    handleLogin,
+    handleRegister,
+    isLoggedIn,
+    loading: authLoading,
+  } = useAuth();
   const { top, right, bottom, left } = useSafeAreaInsets();
+
   const [activeTab, setActiveTab] = useState<AuthTab>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const tabAnim = useRef(new Animated.Value(0)).current;
   const router = useRouter();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn && !authLoading) {
+      router.replace('/(tabs)');
+    }
+  }, [isLoggedIn, authLoading, router]);
 
   const switchTab = (tab: AuthTab) => {
     Animated.timing(tabAnim, {
@@ -52,13 +69,34 @@ export default function AuthScreen() {
     outputRange: ['2%', '50%'],
   });
 
-  const handleSubmit = () => {
-    if (activeTab === 'login') {
-      console.log('Login:', { email, password });
-      // TODO: wire to Supabase auth
-    } else {
-      console.log('Sign up:', { userName, email, password });
-      // TODO: wire to Supabase auth
+  const handleSubmit = async () => {
+    if (!email.trim() || !password.trim()) {
+      Alert.alert('Error', 'Email and password are required');
+      return;
+    }
+
+    if (activeTab === 'signup' && !userName.trim()) {
+      Alert.alert('Error', 'Please choose a username');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      if (activeTab === 'login') {
+        await handleLogin(email.trim(), password);
+      } else {
+        await handleRegister(userName.trim(), email.trim(), password);
+        Alert.alert('Success!', 'Account created and you are now logged in 🎉');
+      }
+    } catch (error: any) {
+      console.error(error);
+      Alert.alert(
+        'Error',
+        error.message || 'Something went wrong. Please try again.',
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -76,7 +114,6 @@ export default function AuthScreen() {
   return (
     <View style={styles.safeArea}>
       <StatusBar style='light' />
-
       {/* Ambient background orbs */}
       <View style={styles.orbTop} />
       <View style={styles.orbBottom} />
@@ -86,6 +123,7 @@ export default function AuthScreen() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ToggleThemeButton />
+
         <ScrollView
           contentContainerStyle={styles.scroll}
           keyboardShouldPersistTaps='handled'
@@ -138,7 +176,7 @@ export default function AuthScreen() {
               </Pressable>
             </View>
 
-            {/* Sign up only: Full name */}
+            {/* Sign up only: Username */}
             {activeTab === 'signup' && (
               <View style={styles.field}>
                 <Text style={styles.fieldLabel}>USER NAME</Text>
@@ -199,11 +237,17 @@ export default function AuthScreen() {
               style={({ pressed }) => [
                 styles.btnPrimary,
                 pressed && styles.btnPrimaryPressed,
+                (isSubmitting || authLoading) && { opacity: 0.7 },
               ]}
               onPress={handleSubmit}
+              disabled={isSubmitting || authLoading}
             >
               <Text style={styles.btnPrimaryText}>
-                {activeTab === 'login' ? 'Log in' : 'Create account'}
+                {isSubmitting
+                  ? 'Processing...'
+                  : activeTab === 'login'
+                    ? 'Log in'
+                    : 'Create account'}
               </Text>
             </Pressable>
 
@@ -223,7 +267,8 @@ export default function AuthScreen() {
             >
               <Text style={styles.btnGoogleText}>Continue with Google</Text>
             </Pressable>
-            {/* Link to rest of app */}
+
+            {/* Debug button (remove later) */}
             <Pressable
               style={({ pressed }) => [
                 styles.btnGoogle,
@@ -231,7 +276,7 @@ export default function AuthScreen() {
               ]}
               onPress={() => router.push('/(tabs)')}
             >
-              <Text style={styles.btnGoogleText}>See App</Text>
+              <Text style={styles.btnGoogleText}>See App (Debug)</Text>
             </Pressable>
 
             {/* Terms */}
@@ -273,7 +318,6 @@ function createStyles(
       paddingHorizontal: spacing.lg,
       paddingVertical: spacing.xl,
     },
-
     // Ambient orbs
     orbTop: {
       position: 'absolute',
@@ -295,7 +339,6 @@ function createStyles(
       bottom: -50,
       right: -40,
     },
-
     // Logo area
     logoArea: {
       alignItems: 'center',
@@ -326,7 +369,6 @@ function createStyles(
       color: colors.textSecondary,
       marginTop: 4,
     },
-
     // Card
     card: {
       backgroundColor: colors.bgSecondary,
@@ -336,7 +378,6 @@ function createStyles(
       padding: spacing.lg,
       ...shadows.card,
     },
-
     // Tabs
     tabRow: {
       flexDirection: 'row',
@@ -369,7 +410,6 @@ function createStyles(
       color: colors.textPrimary,
       fontFamily: 'Inter_500Medium',
     },
-
     // Fields
     field: {
       marginBottom: spacing.md,
@@ -392,7 +432,6 @@ function createStyles(
       fontFamily: 'Inter_400Regular',
       color: colors.textPrimary,
     },
-
     // Forgot
     forgotRow: {
       alignItems: 'flex-end',
@@ -404,7 +443,6 @@ function createStyles(
       fontSize: 13,
       color: colors.accentPrimary,
     },
-
     // Primary button
     btnPrimary: {
       backgroundColor: colors.accentPrimary,
@@ -421,7 +459,6 @@ function createStyles(
       color: colors.bgPrimary,
       letterSpacing: -0.1,
     },
-
     // Divider
     divider: {
       flexDirection: 'row',
@@ -439,7 +476,6 @@ function createStyles(
       fontSize: 12,
       color: colors.textSecondary,
     },
-
     // Google button
     btnGoogle: {
       borderWidth: 0.5,
@@ -456,7 +492,6 @@ function createStyles(
       fontSize: 14,
       color: colors.textPrimary,
     },
-
     // Terms
     terms: {
       fontFamily: 'Inter_400Regular',
