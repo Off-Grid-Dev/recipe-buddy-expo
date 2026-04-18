@@ -17,10 +17,8 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-// context
 import { useTheme } from '@context/ThemeContext';
 
-// types
 import {
   ColorTheme,
   ThemeRadii,
