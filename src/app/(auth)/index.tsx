@@ -36,6 +36,7 @@ export default function AuthScreen() {
     handleRegister,
     isLoggedIn,
     loading: authLoading,
+    supabase,
   } = useAuth();
   const { top, right, bottom, left } = useSafeAreaInsets();
 
@@ -184,7 +185,7 @@ export default function AuthScreen() {
                   style={styles.input}
                   placeholder='Choose a user name'
                   placeholderTextColor={colors.textSecondary ?? '#475569'}
-                  value={userName}
+                  value={userName.trim()}
                   onChangeText={setUserName}
                   autoCapitalize='none'
                   autoComplete='off'
@@ -219,6 +220,7 @@ export default function AuthScreen() {
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
+                autoCapitalize='none'
                 autoComplete={
                   activeTab === 'signup' ? 'new-password' : 'current-password'
                 }
