@@ -273,17 +273,21 @@ export default function AuthScreen() {
             {/* Debug button (remove later) */}
             <Pressable
               style={({ pressed }) => [
-                styles.btnGoogle,
+                styles.btnLocalUser,
                 pressed && styles.btnGooglePressed,
               ]}
               onPress={() => router.push('/(tabs)')}
             >
-              <Text style={styles.btnGoogleText}>See App (Debug)</Text>
+              <Text style={styles.btnLocalUserText}>Local Only</Text>
             </Pressable>
 
             {/* Terms */}
             <Text style={styles.terms}>
-              By {activeTab === 'login' ? 'continuing' : 'creating an account'},
+              By selecting the &apos;Local Only&apos; option you will not create
+              an account or save any data on our servers. You will also not have
+              the ability to react to other users&apos; recipes or share your
+              own. You may create an account at any time. By{' '}
+              {activeTab === 'login' ? 'continuing' : 'creating an account'},
               you agree to our <Text style={styles.termsLink}>Terms</Text> and{' '}
               <Text style={styles.termsLink}>Privacy Policy</Text>
             </Text>
@@ -493,6 +497,18 @@ function createStyles(
       fontFamily: 'Inter_400Regular',
       fontSize: 14,
       color: colors.textPrimary,
+    },
+    btnLocalUser: {
+      borderWidth: 2,
+      borderColor: colors.accentPrimary,
+      borderRadius: radii.md,
+      paddingVertical: spacing.sm + 3,
+      alignItems: 'center',
+    },
+    btnLocalUserText: {
+      fontFamily: 'Inter_500Medium',
+      fontSize: 16,
+      color: colors.accentPrimary,
     },
     // Terms
     terms: {
