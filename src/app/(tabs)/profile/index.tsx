@@ -9,7 +9,7 @@ import ToggleThemeButton from '@components/buttons/ToggleTheme';
 
 export default function ProfileScreen() {
   const { colors, spacing, radii, shadows, textStyles } = useTheme();
-  const { user, handleLogout } = useAuth();
+  const { user, handleLogout, isLoggedIn } = useAuth();
 
   const displayName =
     user?.user_metadata?.display_name ||
@@ -18,13 +18,15 @@ export default function ProfileScreen() {
 
   const email = user?.email || 'No email';
 
+  const avatarImg = user.image;
+
   const handleLogOut = async () => {
     try {
       await handleLogout();
       Alert.alert('Logged out', 'See you next time!');
       router.replace('/(auth)');
     } catch (error) {
-      Alert.alert('Error', 'Could not log out');
+      Alert.alert('Error', `Could not log out: ${error}`);
     }
   };
 
@@ -57,15 +59,17 @@ export default function ProfileScreen() {
             marginBottom: spacing.xl,
           }}
         >
-          <Image
-            source={require('../../../../assets/images/geir.jpg')}
-            style={{
-              width: 148,
-              height: 148,
-              borderRadius: radii.full,
-            }}
-            contentFit='cover'
-          />
+          {avatarImg && (
+            <Image
+              source={require(avatarImg)}
+              style={{
+                width: 148,
+                height: 148,
+                borderRadius: radii.full,
+              }}
+              contentFit='cover'
+            />
+          )}
         </View>
 
         {/* Display Name - using your theme typography */}
@@ -83,15 +87,16 @@ export default function ProfileScreen() {
         </Text>
 
         {/* Email */}
-        <Text
-          style={[
-            textStyles.bodySmall,
-            { color: colors.textSecondary, marginBottom: spacing.xxl },
-          ]}
-        >
-          {email}
-        </Text>
-
+        {email && (
+          <Text
+            style={[
+              textStyles.bodySmall,
+              { color: colors.textSecondary, marginBottom: spacing.xxl },
+            ]}
+          >
+            {email}
+          </Text>
+        )}
         {/* Divider */}
         <View
           style={{
@@ -130,25 +135,27 @@ export default function ProfileScreen() {
         </View>
 
         {/* Log Out Button */}
-        <Pressable
-          style={({ pressed }) => [
-            {
-              backgroundColor: colors.error,
-              borderRadius: radii.md,
-              paddingVertical: spacing.md,
-              paddingHorizontal: spacing.xl,
-              width: '100%',
-              alignItems: 'center',
-              ...shadows.sm,
-            },
-            pressed && { opacity: 0.85 },
-          ]}
-          onPress={handleLogOut}
-        >
-          <Text style={[textStyles.button, { color: colors.bgPrimary }]}>
-            Log Out
-          </Text>
-        </Pressable>
+        {isLoggedIn && (
+          <Pressable
+            style={({ pressed }) => [
+              {
+                backgroundColor: colors.error,
+                borderRadius: radii.md,
+                paddingVertical: spacing.md,
+                paddingHorizontal: spacing.xl,
+                width: '100%',
+                alignItems: 'center',
+                ...shadows.sm,
+              },
+              pressed && { opacity: 0.85 },
+            ]}
+            onPress={handleLogOut}
+          >
+            <Text style={[textStyles.button, { color: colors.bgPrimary }]}>
+              Log Out
+            </Text>
+          </Pressable>
+        )}
 
         <Text
           style={[
