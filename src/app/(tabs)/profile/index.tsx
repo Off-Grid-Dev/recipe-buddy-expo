@@ -18,7 +18,7 @@ export default function ProfileScreen() {
 
   const email = user?.email || 'No email';
 
-  const avatarImg = user.image;
+  // const avatarImg = user.image;
 
   const handleLogOut = async () => {
     try {
@@ -59,17 +59,15 @@ export default function ProfileScreen() {
             marginBottom: spacing.xl,
           }}
         >
-          {avatarImg && (
-            <Image
-              source={require(avatarImg)}
-              style={{
-                width: 148,
-                height: 148,
-                borderRadius: radii.full,
-              }}
-              contentFit='cover'
-            />
-          )}
+          <Image
+            source={require('../../../../assets/icons/splash-icon.png')}
+            style={{
+              width: 148,
+              height: 148,
+              borderRadius: radii.full,
+            }}
+            contentFit='cover'
+          />
         </View>
 
         {/* Display Name - using your theme typography */}
